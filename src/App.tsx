@@ -3,7 +3,7 @@ import { useLegalFabDemo } from './hooks/useLegalFabDemo';
 import { Header } from './components/Header';
 import { QueryPanel } from './components/QueryPanel';
 import { StepIndicator } from './components/StepIndicator';
-import { GraphVisualization } from './components/GraphVisualization';
+import { FixedGraphVisualization } from './components/FixedGraphVisualization';
 import { AgentsPanel } from './components/AgentsPanel';
 import { SourcesPanel } from './components/SourcesPanel';
 import { ControlBar } from './components/ControlBar';
@@ -27,13 +27,13 @@ function App() {
     <div className="h-screen w-screen flex flex-col overflow-hidden">
       {/* Header */}
       <Header />
-      
+
       {/* Main Content */}
       <div className="flex-1 flex flex-col p-4 gap-4 overflow-hidden">
         {/* Top Section: Query + Step Indicator */}
         <div className="flex gap-4">
           <QueryPanel query={demo.query} />
-          <StepIndicator 
+          <StepIndicator
             currentStep={demo.currentStep}
             totalSteps={demo.totalSteps}
             onStepClick={demo.goToStep}
@@ -43,18 +43,18 @@ function App() {
         {/* Middle Section: Graph + Side Panels */}
         <div className="flex-1 flex gap-4 overflow-hidden">
           {/* Left Panel: Agents */}
-          <div className="w-64 flex-shrink-0">
-            <AgentsPanel 
+          <div className="w-56 flex-shrink-0">
+            <AgentsPanel
               step={demo.step}
               activeAgents={demo.activeAgents}
             />
           </div>
 
           {/* Center: Graph Visualization */}
-          <div className="flex-1 flex flex-col gap-4 overflow-hidden">
+          <div className="flex-1 flex flex-col gap-3 overflow-hidden">
             <StepMessage step={demo.step} isAnimating={demo.isAnimating} />
             <div className="flex-1 glass rounded-xl overflow-hidden">
-              <GraphVisualization 
+              <FixedGraphVisualization
                 nodes={demo.visibleNodes}
                 edges={demo.visibleEdges}
               />
@@ -62,8 +62,8 @@ function App() {
           </div>
 
           {/* Right Panel: Sources */}
-          <div className="w-64 flex-shrink-0">
-            <SourcesPanel 
+          <div className="w-56 flex-shrink-0">
+            <SourcesPanel
               step={demo.step}
               activeSources={demo.activeSources}
             />
@@ -71,7 +71,7 @@ function App() {
         </div>
 
         {/* Bottom Section: Controls */}
-        <ControlBar 
+        <ControlBar
           isPlaying={demo.isPlaying}
           currentStep={demo.currentStep}
           totalSteps={demo.totalSteps}
@@ -88,7 +88,7 @@ function App() {
 
       {/* Results Modal */}
       {showResults && (
-        <ResultsPanel 
+        <ResultsPanel
           finalAnswer={demo.finalAnswer}
           metadata={demo.metadata}
           onClose={handleHideResults}

@@ -139,3 +139,25 @@ body {
 .progress-animated {
   animation: progress-glow 2s ease-in-out infinite;
 }
+
+/* Flow dot animation for pipeline connectors */
+@keyframes flow-dot {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% - 8px);
+    opacity: 0;
+  }
+}
+
+.animate-flow-dot {
+  animation: flow-dot 1.5s ease-in-out infinite;
+}

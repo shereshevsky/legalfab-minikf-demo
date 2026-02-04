@@ -5,5 +5,7 @@ export { StepMessage } from './StepMessage';
 export { AgentsPanel } from './AgentsPanel';
 export { SourcesPanel } from './SourcesPanel';
 export { GraphVisualization } from './GraphVisualization';
+export { FixedGraphVisualization } from './FixedGraphVisualization';
+export { PipelineVisualization } from './PipelineVisualization';
 export { ControlBar } from './ControlBar';
 export { ResultsPanel } from './ResultsPanel';
