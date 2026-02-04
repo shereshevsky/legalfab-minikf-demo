@@ -41,7 +41,7 @@ export function useLegalFabDemo(): UseLegalFabDemoReturn {
   const [activeSources, setActiveSources] = useState<string[]>([]);
   const [isAnimating, setIsAnimating] = useState(false);
   
-  const animationTimeouts = useRef<NodeJS.Timeout[]>([]);
+  const animationTimeouts = useRef<ReturnType<typeof setTimeout>[]>([]);
   const data = demoData as DemoAnimation;
   const totalSteps = data.totalSteps;
   const step = currentStep >= 0 ? data.steps[currentStep] : null;

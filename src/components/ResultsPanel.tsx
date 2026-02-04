@@ -1,11 +1,10 @@
 import { motion } from 'framer-motion';
-import { 
-  X, 
-  CheckCircle2, 
-  Building2, 
-  FileText, 
-  Clock, 
-  DollarSign,
+import {
+  X,
+  CheckCircle2,
+  Building2,
+  FileText,
+  Clock,
   GitBranch,
   Bot,
   Database,
@@ -24,9 +23,6 @@ export function ResultsPanel({ finalAnswer, metadata, onClose }: ResultsPanelPro
   
   // Calculate totals
   const totalMatters = clients.reduce((acc, [, matters]) => acc + matters.length, 0);
-  const totalWip = clients.reduce((acc, [, matters]) => {
-    return acc + matters.length; // Simplified - in real app would sum actual values
-  }, 0);
 
   return (
     <motion.div

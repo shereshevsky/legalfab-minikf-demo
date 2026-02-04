@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion';
 import { PHASE_ICONS, PHASE_TITLES, StepPhase } from '../types';
-import demoData from '../data/demoData.json';
 
 interface StepIndicatorProps {
   currentStep: number;
-  totalSteps: number;
+  totalSteps?: number;
   onStepClick: (step: number) => void;
 }
 
@@ -17,7 +16,7 @@ const phases: StepPhase[] = [
   'RESPONSE_SYNTHESIS',
 ];
 
-export function StepIndicator({ currentStep, totalSteps, onStepClick }: StepIndicatorProps) {
+export function StepIndicator({ currentStep, onStepClick }: StepIndicatorProps) {
   return (
     <div className="glass rounded-xl p-4 flex-shrink-0">
       <p className="text-xs text-slate-400 mb-3">Execution Pipeline</p>

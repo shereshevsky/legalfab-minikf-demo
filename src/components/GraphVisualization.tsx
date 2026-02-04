@@ -1,7 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react';
 import cytoscape, { Core, ElementDefinition } from 'cytoscape';
 import type { GraphNode, GraphEdge } from '../types';
-import { NODE_COLORS, STATUS_COLORS } from '../types';
+import { NODE_COLORS } from '../types';
 
 interface GraphVisualizationProps {
   nodes: GraphNode[];
@@ -71,7 +71,7 @@ export function GraphVisualization({ nodes, edges }: GraphVisualizationProps) {
             'border-width': 2,
             'border-opacity': 0.8,
             'transition-property': 'background-color, border-color, width, height',
-            'transition-duration': '0.3s',
+            'transition-duration': 300,
           },
         },
         // Node types
@@ -209,7 +209,7 @@ export function GraphVisualization({ nodes, edges }: GraphVisualizationProps) {
             'arrow-scale': 0.8,
             'opacity': 0.7,
             'transition-property': 'line-color, target-arrow-color, opacity',
-            'transition-duration': '0.3s',
+            'transition-duration': 300,
           },
         },
         {
@@ -279,7 +279,6 @@ export function GraphVisualization({ nodes, edges }: GraphVisualizationProps) {
     
     // Get existing element IDs
     const existingIds = new Set(cy.elements().map(ele => ele.id()));
-    const newIds = new Set(newElements.map(ele => ele.data?.id));
 
     // Add new elements
     const toAdd = newElements.filter(ele => !existingIds.has(ele.data?.id || ''));
