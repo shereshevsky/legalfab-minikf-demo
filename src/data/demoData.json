@@ -7,7 +7,7 @@
       "phase": "QUERY_ANALYSIS",
       "message": "Analyzing query to identify required data domains and planning retrieval strategy...",
       "details": "Decomposing question into sub-queries: (1) Active matters, (2) Billing history <30 days, (3) WIP age >60 days, (4) Client relationships",
-      "duration": 1200,
+      "duration": 2000,
       "graph": {
         "nodes": [
           {
@@ -67,7 +67,7 @@
       "phase": "MATTER_RETRIEVAL",
       "message": "Matter Finance Agent retrieving all active matters from Practice Management System...",
       "details": "Querying Elite PMS for matters with status='Active'. Resolving client entities across systems.",
-      "duration": 2500,
+      "duration": 4000,
       "graph": {
         "nodes": [
           {
@@ -298,7 +298,7 @@
       "phase": "BILLING_ANALYSIS",
       "message": "Revenue Protection Agent analyzing billing history to identify matters without invoices in last 30 days...",
       "details": "Cross-referencing matter IDs with Elite Billing module. Filtering for last_invoice_date > 30 days ago.",
-      "duration": 3000,
+      "duration": 5000,
       "graph": {
         "nodes": [
           {
@@ -545,7 +545,7 @@
       "phase": "WIP_CALCULATION",
       "message": "Calculating average WIP age from time entries. Filtering for matters with WIP age exceeding 60 days...",
       "details": "Querying Intapp Time for unbilled time entries. Computing weighted average age per matter based on entry dates.",
-      "duration": 3500,
+      "duration": 5500,
       "graph": {
         "nodes": [
           {
@@ -876,7 +876,7 @@
       "phase": "CLIENT_ENRICHMENT",
       "message": "Enriching results with client relationship data and organizing by client hierarchy...",
       "details": "Querying PeopleSoft CRM for client metadata. Resolving entity relationships and building final hierarchy.",
-      "duration": 2000,
+      "duration": 4000,
       "graph": {
         "nodes": [
           {
@@ -1163,7 +1163,7 @@
       "phase": "RESPONSE_SYNTHESIS",
       "message": "Synthesizing final response with consolidated view organized by client...",
       "details": "All sub-queries complete. Building structured response with full data lineage and source attribution.",
-      "duration": 1500,
+      "duration": 4500,
       "graph": {
         "nodes": [
           {
@@ -1513,7 +1513,7 @@
     }
   },
   "metadata": {
-    "totalDuration": 13700,
+    "totalDuration": 25000,
     "graphOperations": 6,
     "sourcesQueried": 4,
     "agentsUsed": 2,

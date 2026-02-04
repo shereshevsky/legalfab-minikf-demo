@@ -42,6 +42,7 @@ export function useLegalFabDemo(): UseLegalFabDemoReturn {
   const [isAnimating, setIsAnimating] = useState(false);
   
   const animationTimeouts = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const isAnimatingRef = useRef(false);
   const data = demoData as DemoAnimation;
   const totalSteps = data.totalSteps;
   const step = currentStep >= 0 ? data.steps[currentStep] : null;
@@ -55,12 +56,13 @@ export function useLegalFabDemo(): UseLegalFabDemoReturn {
   // Animate nodes and edges appearing
   useEffect(() => {
     if (!step || currentStep < 0) return;
-    
+
     clearAnimations();
+    isAnimatingRef.current = true;
     setIsAnimating(true);
 
-    const nodeDelay = 80;
-    const edgeDelay = 40;
+    const nodeDelay = 120;
+    const edgeDelay = 60;
 
     // Animate nodes
     step.graph.nodes.forEach((node, index) => {
@@ -98,6 +100,7 @@ export function useLegalFabDemo(): UseLegalFabDemoReturn {
     // Mark animation as complete
     const totalAnimationTime = edgeStartDelay + step.graph.edges.length * edgeDelay + 200;
     const doneTimeout = setTimeout(() => {
+      isAnimatingRef.current = false;
       setIsAnimating(false);
     }, totalAnimationTime);
     animationTimeouts.current.push(doneTimeout);
@@ -107,14 +110,18 @@ export function useLegalFabDemo(): UseLegalFabDemoReturn {
 
   // Auto-play functionality
   useEffect(() => {
-    if (!isPlaying || currentStep >= totalSteps - 1 || isAnimating) {
+    // Use ref for synchronous check to avoid race condition
+    if (!isPlaying || currentStep >= totalSteps - 1 || isAnimating || isAnimatingRef.current) {
       if (currentStep >= totalSteps - 1) setIsPlaying(false);
       return;
     }
 
+    // Add small buffer after animation completes before advancing
     const duration = step?.duration || 2000;
     const timer = setTimeout(() => {
-      setCurrentStep(prev => prev + 1);
+      if (!isAnimatingRef.current) {
+        setCurrentStep(prev => prev + 1);
+      }
     }, duration);
 
     return () => clearTimeout(timer);
@@ -134,6 +141,7 @@ export function useLegalFabDemo(): UseLegalFabDemoReturn {
 
   const reset = useCallback(() => {
     clearAnimations();
+    isAnimatingRef.current = false;
     setCurrentStep(-1);
     setIsPlaying(false);
     setVisibleNodes([]);
