@@ -1,0 +1,1522 @@
+{
+  "query": "Show all active matters that have not been billed within the last 30 days, and have an average work in progress (WIP) age exceeding 60 days organized by client.",
+  "totalSteps": 6,
+  "steps": [
+    {
+      "stepNumber": 1,
+      "phase": "QUERY_ANALYSIS",
+      "message": "Analyzing query to identify required data domains and planning retrieval strategy...",
+      "details": "Decomposing question into sub-queries: (1) Active matters, (2) Billing history <30 days, (3) WIP age >60 days, (4) Client relationships",
+      "duration": 1200,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "active",
+            "properties": {
+              "text": "Active matters, no billing 30d, WIP >60d, by client"
+            }
+          },
+          {
+            "id": "subquery_1",
+            "type": "SubQuery",
+            "label": "Find Active Matters",
+            "status": "pending",
+            "properties": {}
+          },
+          {
+            "id": "subquery_2",
+            "type": "SubQuery",
+            "label": "Check Billing Status",
+            "status": "pending",
+            "properties": {}
+          },
+          {
+            "id": "subquery_3",
+            "type": "SubQuery",
+            "label": "Calculate WIP Age",
+            "status": "pending",
+            "properties": {}
+          },
+          {
+            "id": "subquery_4",
+            "type": "SubQuery",
+            "label": "Organize by Client",
+            "status": "pending",
+            "properties": {}
+          }
+        ],
+        "edges": [
+          { "source": "query_root", "target": "subquery_1", "type": "DECOMPOSES_TO" },
+          { "source": "query_root", "target": "subquery_2", "type": "DECOMPOSES_TO" },
+          { "source": "query_root", "target": "subquery_3", "type": "DECOMPOSES_TO" },
+          { "source": "query_root", "target": "subquery_4", "type": "DECOMPOSES_TO" },
+          { "source": "subquery_1", "target": "subquery_2", "type": "PRECEDES" },
+          { "source": "subquery_2", "target": "subquery_3", "type": "PRECEDES" },
+          { "source": "subquery_3", "target": "subquery_4", "type": "PRECEDES" }
+        ]
+      },
+      "agents": [],
+      "sources": [],
+      "result": null
+    },
+    {
+      "stepNumber": 2,
+      "phase": "MATTER_RETRIEVAL",
+      "message": "Matter Finance Agent retrieving all active matters from Practice Management System...",
+      "details": "Querying Elite PMS for matters with status='Active'. Resolving client entities across systems.",
+      "duration": 2500,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "subquery_1",
+            "type": "SubQuery",
+            "label": "Find Active Matters",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "agent_mfa",
+            "type": "Agent",
+            "label": "Matter Finance Agent",
+            "status": "active",
+            "properties": {
+              "capability": "Matter & Financial Data Analysis"
+            }
+          },
+          {
+            "id": "source_elite",
+            "type": "Source",
+            "label": "Elite (PMS)",
+            "status": "querying",
+            "properties": {
+              "system": "Practice Management"
+            }
+          },
+          {
+            "id": "client_abbott",
+            "type": "Client",
+            "label": "Abbott Laboratories",
+            "status": "discovered",
+            "properties": {
+              "industry": "Healthcare/Pharmaceuticals"
+            }
+          },
+          {
+            "id": "client_astra",
+            "type": "Client",
+            "label": "AstraZeneca PLC",
+            "status": "discovered",
+            "properties": {
+              "industry": "Pharmaceuticals"
+            }
+          },
+          {
+            "id": "client_barclays",
+            "type": "Client",
+            "label": "Barclays PLC",
+            "status": "discovered",
+            "properties": {
+              "industry": "Energy/Oil & Gas"
+            }
+          },
+          {
+            "id": "matter_abb_001",
+            "type": "Matter",
+            "label": "2024-ABB-001",
+            "status": "discovered",
+            "properties": {
+              "name": "Exact Sciences Acquisition - Antitrust",
+              "status": "Active"
+            }
+          },
+          {
+            "id": "matter_abb_002",
+            "type": "Matter",
+            "label": "2024-ABB-002",
+            "status": "discovered",
+            "properties": {
+              "name": "FreeStyle Libre 3 - Product Liability",
+              "status": "Active"
+            }
+          },
+          {
+            "id": "matter_abb_003",
+            "type": "Matter",
+            "label": "2024-ABB-003",
+            "status": "discovered",
+            "properties": {
+              "name": "Lingo Biowearable - Data Privacy",
+              "status": "Active"
+            }
+          },
+          {
+            "id": "matter_abb_004",
+            "type": "Matter",
+            "label": "2024-ABB-004",
+            "status": "discovered",
+            "properties": {
+              "name": "Volt PFA System - IP Enforcement",
+              "status": "Active"
+            }
+          },
+          {
+            "id": "matter_ast_001",
+            "type": "Matter",
+            "label": "2024-MAT-00123",
+            "status": "discovered",
+            "properties": {
+              "name": "Farxiga Patent Litigation",
+              "status": "Active"
+            }
+          },
+          {
+            "id": "matter_ast_002",
+            "type": "Matter",
+            "label": "2024-AST-002",
+            "status": "discovered",
+            "properties": {
+              "name": "Oral GLP-1 Acquisition",
+              "status": "Active"
+            }
+          },
+          {
+            "id": "matter_ast_003",
+            "type": "Matter",
+            "label": "2024-AST-003",
+            "status": "discovered",
+            "properties": {
+              "name": "Actinium-225 Supply Chain",
+              "status": "Active"
+            }
+          },
+          {
+            "id": "matter_ast_004",
+            "type": "Matter",
+            "label": "MAT-2024-004",
+            "status": "discovered",
+            "properties": {
+              "name": "China Anti-Corruption Probe",
+              "status": "Active"
+            }
+          },
+          {
+            "id": "matter_bp_001",
+            "type": "Matter",
+            "label": "2024-BP-001",
+            "status": "discovered",
+            "properties": {
+              "name": "Hussein Julood Gas Flaring Lawsuit",
+              "status": "Active"
+            }
+          },
+          {
+            "id": "matter_bp_002",
+            "type": "Matter",
+            "label": "2024-BP-002",
+            "status": "discovered",
+            "properties": {
+              "name": "Renewable Assets Divestiture",
+              "status": "Active"
+            }
+          },
+          {
+            "id": "matter_bp_003",
+            "type": "Matter",
+            "label": "2024-BP-003",
+            "status": "discovered",
+            "properties": {
+              "name": "ONGC Mumbai High Contract Review",
+              "status": "Active"
+            }
+          },
+          {
+            "id": "matter_bp_004",
+            "type": "Matter",
+            "label": "2024-BP-004",
+            "status": "discovered",
+            "properties": {
+              "name": "Israel/Gaza Fuel Supply Lawsuit",
+              "status": "Active"
+            }
+          }
+        ],
+        "edges": [
+          { "source": "subquery_1", "target": "agent_mfa", "type": "ASSIGNED_TO" },
+          { "source": "agent_mfa", "target": "source_elite", "type": "QUERIES" },
+          { "source": "source_elite", "target": "client_abbott", "type": "RETURNS" },
+          { "source": "source_elite", "target": "client_astra", "type": "RETURNS" },
+          { "source": "source_elite", "target": "client_barclays", "type": "RETURNS" },
+          { "source": "client_abbott", "target": "matter_abb_001", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_002", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_003", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_004", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_001", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_002", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_003", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_004", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_001", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_002", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_003", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_004", "type": "HAS_MATTER" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "matter_finance_agent",
+          "name": "Matter Finance Agent",
+          "status": "active",
+          "action": "Retrieving active matters from Elite PMS"
+        }
+      ],
+      "sources": [
+        {
+          "id": "elite_pms",
+          "name": "Elite (PMS)",
+          "type": "Practice Management System",
+          "status": "connected",
+          "recordsReturned": 47
+        }
+      ],
+      "result": {
+        "mattersFound": 47,
+        "clientsIdentified": 3,
+        "status": "Active matters retrieved"
+      }
+    },
+    {
+      "stepNumber": 3,
+      "phase": "BILLING_ANALYSIS",
+      "message": "Revenue Protection Agent analyzing billing history to identify matters without invoices in last 30 days...",
+      "details": "Cross-referencing matter IDs with Elite Billing module. Filtering for last_invoice_date > 30 days ago.",
+      "duration": 3000,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "subquery_2",
+            "type": "SubQuery",
+            "label": "Check Billing Status",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "agent_mfa",
+            "type": "Agent",
+            "label": "Matter Finance Agent",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "agent_rpa",
+            "type": "Agent",
+            "label": "Revenue Protection Agent",
+            "status": "active",
+            "properties": {
+              "capability": "Billing & Revenue Analysis"
+            }
+          },
+          {
+            "id": "source_elite",
+            "type": "Source",
+            "label": "Elite (PMS)",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "source_billing",
+            "type": "Source",
+            "label": "Elite (Billing)",
+            "status": "querying",
+            "properties": {
+              "system": "Financial/Billing"
+            }
+          },
+          {
+            "id": "client_abbott",
+            "type": "Client",
+            "label": "Abbott Laboratories",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "client_astra",
+            "type": "Client",
+            "label": "AstraZeneca PLC",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "client_barclays",
+            "type": "Client",
+            "label": "Barclays PLC",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "matter_abb_001",
+            "type": "Matter",
+            "label": "2024-ABB-001",
+            "status": "checking",
+            "properties": {
+              "name": "Exact Sciences Acquisition",
+              "lastBilled": null
+            }
+          },
+          {
+            "id": "matter_abb_002",
+            "type": "Matter",
+            "label": "2024-ABB-002",
+            "status": "checking",
+            "properties": {
+              "name": "FreeStyle Libre 3",
+              "lastBilled": null
+            }
+          },
+          {
+            "id": "matter_abb_003",
+            "type": "Matter",
+            "label": "2024-ABB-003",
+            "status": "checking",
+            "properties": {
+              "name": "Lingo Biowearable",
+              "lastBilled": null
+            }
+          },
+          {
+            "id": "matter_abb_004",
+            "type": "Matter",
+            "label": "2024-ABB-004",
+            "status": "checking",
+            "properties": {
+              "name": "Volt PFA System",
+              "lastBilled": null
+            }
+          },
+          {
+            "id": "matter_ast_001",
+            "type": "Matter",
+            "label": "2024-MAT-00123",
+            "status": "checking",
+            "properties": {}
+          },
+          {
+            "id": "matter_ast_002",
+            "type": "Matter",
+            "label": "2024-AST-002",
+            "status": "checking",
+            "properties": {}
+          },
+          {
+            "id": "matter_ast_003",
+            "type": "Matter",
+            "label": "2024-AST-003",
+            "status": "checking",
+            "properties": {}
+          },
+          {
+            "id": "matter_ast_004",
+            "type": "Matter",
+            "label": "MAT-2024-004",
+            "status": "checking",
+            "properties": {}
+          },
+          {
+            "id": "matter_bp_001",
+            "type": "Matter",
+            "label": "2024-BP-001",
+            "status": "checking",
+            "properties": {}
+          },
+          {
+            "id": "matter_bp_002",
+            "type": "Matter",
+            "label": "2024-BP-002",
+            "status": "checking",
+            "properties": {}
+          },
+          {
+            "id": "matter_bp_003",
+            "type": "Matter",
+            "label": "2024-BP-003",
+            "status": "checking",
+            "properties": {}
+          },
+          {
+            "id": "matter_bp_004",
+            "type": "Matter",
+            "label": "2024-BP-004",
+            "status": "checking",
+            "properties": {}
+          },
+          {
+            "id": "billing_filter",
+            "type": "Filter",
+            "label": "No Invoice >30 Days",
+            "status": "active",
+            "properties": {
+              "criteria": "last_invoice_date < NOW() - 30 days"
+            }
+          }
+        ],
+        "edges": [
+          { "source": "subquery_2", "target": "agent_rpa", "type": "ASSIGNED_TO" },
+          { "source": "agent_rpa", "target": "source_billing", "type": "QUERIES" },
+          { "source": "agent_mfa", "target": "agent_rpa", "type": "HANDS_OFF_TO" },
+          { "source": "source_billing", "target": "billing_filter", "type": "APPLIES" },
+          { "source": "billing_filter", "target": "matter_abb_001", "type": "EVALUATES" },
+          { "source": "billing_filter", "target": "matter_abb_002", "type": "EVALUATES" },
+          { "source": "billing_filter", "target": "matter_abb_003", "type": "EVALUATES" },
+          { "source": "billing_filter", "target": "matter_abb_004", "type": "EVALUATES" },
+          { "source": "billing_filter", "target": "matter_ast_001", "type": "EVALUATES" },
+          { "source": "billing_filter", "target": "matter_ast_002", "type": "EVALUATES" },
+          { "source": "billing_filter", "target": "matter_ast_003", "type": "EVALUATES" },
+          { "source": "billing_filter", "target": "matter_ast_004", "type": "EVALUATES" },
+          { "source": "billing_filter", "target": "matter_bp_001", "type": "EVALUATES" },
+          { "source": "billing_filter", "target": "matter_bp_002", "type": "EVALUATES" },
+          { "source": "billing_filter", "target": "matter_bp_003", "type": "EVALUATES" },
+          { "source": "billing_filter", "target": "matter_bp_004", "type": "EVALUATES" },
+          { "source": "client_abbott", "target": "matter_abb_001", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_002", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_003", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_004", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_001", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_002", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_003", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_004", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_001", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_002", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_003", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_004", "type": "HAS_MATTER" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "matter_finance_agent",
+          "name": "Matter Finance Agent",
+          "status": "complete",
+          "action": "Completed matter retrieval"
+        },
+        {
+          "id": "revenue_protection_agent",
+          "name": "Revenue Protection Agent",
+          "status": "active",
+          "action": "Analyzing billing history for 30-day gap"
+        }
+      ],
+      "sources": [
+        {
+          "id": "elite_pms",
+          "name": "Elite (PMS)",
+          "type": "Practice Management System",
+          "status": "complete",
+          "recordsReturned": 47
+        },
+        {
+          "id": "elite_billing",
+          "name": "Elite (Billing)",
+          "type": "Financial System",
+          "status": "querying",
+          "recordsReturned": null
+        }
+      ],
+      "result": {
+        "mattersWithNoBilling30d": 23,
+        "status": "Filtering matters by billing activity"
+      }
+    },
+    {
+      "stepNumber": 4,
+      "phase": "WIP_CALCULATION",
+      "message": "Calculating average WIP age from time entries. Filtering for matters with WIP age exceeding 60 days...",
+      "details": "Querying Intapp Time for unbilled time entries. Computing weighted average age per matter based on entry dates.",
+      "duration": 3500,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "subquery_3",
+            "type": "SubQuery",
+            "label": "Calculate WIP Age",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "agent_mfa",
+            "type": "Agent",
+            "label": "Matter Finance Agent",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "agent_rpa",
+            "type": "Agent",
+            "label": "Revenue Protection Agent",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "source_intapp",
+            "type": "Source",
+            "label": "Intapp Time",
+            "status": "querying",
+            "properties": {
+              "system": "Time Recording"
+            }
+          },
+          {
+            "id": "source_billing",
+            "type": "Source",
+            "label": "Elite (Billing)",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "wip_filter",
+            "type": "Filter",
+            "label": "Avg WIP Age >60 Days",
+            "status": "active",
+            "properties": {
+              "criteria": "AVG(unbilled_entry_age) > 60 days"
+            }
+          },
+          {
+            "id": "client_abbott",
+            "type": "Client",
+            "label": "Abbott Laboratories",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "client_astra",
+            "type": "Client",
+            "label": "AstraZeneca PLC",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "client_barclays",
+            "type": "Client",
+            "label": "Barclays PLC",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "matter_abb_001",
+            "type": "Matter",
+            "label": "2024-ABB-001",
+            "status": "qualified",
+            "properties": {
+              "name": "Exact Sciences Acquisition",
+              "avgWipAge": 78,
+              "lastBilledDays": 45
+            }
+          },
+          {
+            "id": "matter_abb_002",
+            "type": "Matter",
+            "label": "2024-ABB-002",
+            "status": "qualified",
+            "properties": {
+              "name": "FreeStyle Libre 3",
+              "avgWipAge": 92,
+              "lastBilledDays": 62
+            }
+          },
+          {
+            "id": "matter_abb_003",
+            "type": "Matter",
+            "label": "2024-ABB-003",
+            "status": "qualified",
+            "properties": {
+              "name": "Lingo Biowearable",
+              "avgWipAge": 67,
+              "lastBilledDays": 38
+            }
+          },
+          {
+            "id": "matter_abb_004",
+            "type": "Matter",
+            "label": "2024-ABB-004",
+            "status": "qualified",
+            "properties": {
+              "name": "Volt PFA System",
+              "avgWipAge": 84,
+              "lastBilledDays": 51
+            }
+          },
+          {
+            "id": "matter_ast_001",
+            "type": "Matter",
+            "label": "2024-MAT-00123",
+            "status": "qualified",
+            "properties": {
+              "name": "Farxiga Patent Litigation",
+              "avgWipAge": 103,
+              "lastBilledDays": 72
+            }
+          },
+          {
+            "id": "matter_ast_002",
+            "type": "Matter",
+            "label": "2024-AST-002",
+            "status": "qualified",
+            "properties": {
+              "name": "Oral GLP-1 Acquisition",
+              "avgWipAge": 71,
+              "lastBilledDays": 44
+            }
+          },
+          {
+            "id": "matter_ast_003",
+            "type": "Matter",
+            "label": "2024-AST-003",
+            "status": "qualified",
+            "properties": {
+              "name": "Actinium-225 Supply Chain",
+              "avgWipAge": 88,
+              "lastBilledDays": 55
+            }
+          },
+          {
+            "id": "matter_ast_004",
+            "type": "Matter",
+            "label": "MAT-2024-004",
+            "status": "qualified",
+            "properties": {
+              "name": "China Anti-Corruption",
+              "avgWipAge": 65,
+              "lastBilledDays": 33
+            }
+          },
+          {
+            "id": "matter_bp_001",
+            "type": "Matter",
+            "label": "2024-BP-001",
+            "status": "qualified",
+            "properties": {
+              "name": "Gas Flaring Lawsuit",
+              "avgWipAge": 96,
+              "lastBilledDays": 68
+            }
+          },
+          {
+            "id": "matter_bp_002",
+            "type": "Matter",
+            "label": "2024-BP-002",
+            "status": "qualified",
+            "properties": {
+              "name": "Renewable Divestiture",
+              "avgWipAge": 74,
+              "lastBilledDays": 41
+            }
+          },
+          {
+            "id": "matter_bp_003",
+            "type": "Matter",
+            "label": "2024-BP-003",
+            "status": "qualified",
+            "properties": {
+              "name": "ONGC Contract Review",
+              "avgWipAge": 82,
+              "lastBilledDays": 49
+            }
+          },
+          {
+            "id": "matter_bp_004",
+            "type": "Matter",
+            "label": "2024-BP-004",
+            "status": "qualified",
+            "properties": {
+              "name": "Israel/Gaza Lawsuit",
+              "avgWipAge": 61,
+              "lastBilledDays": 35
+            }
+          },
+          {
+            "id": "wip_metric_abb_001",
+            "type": "Metric",
+            "label": "78 days avg",
+            "status": "calculated",
+            "properties": {
+              "type": "WIP_AGE"
+            }
+          },
+          {
+            "id": "wip_metric_abb_002",
+            "type": "Metric",
+            "label": "92 days avg",
+            "status": "calculated",
+            "properties": {
+              "type": "WIP_AGE"
+            }
+          },
+          {
+            "id": "wip_metric_ast_001",
+            "type": "Metric",
+            "label": "103 days avg",
+            "status": "calculated",
+            "properties": {
+              "type": "WIP_AGE",
+              "alert": "HIGH"
+            }
+          },
+          {
+            "id": "wip_metric_bp_001",
+            "type": "Metric",
+            "label": "96 days avg",
+            "status": "calculated",
+            "properties": {
+              "type": "WIP_AGE",
+              "alert": "HIGH"
+            }
+          }
+        ],
+        "edges": [
+          { "source": "subquery_3", "target": "agent_mfa", "type": "ASSIGNED_TO" },
+          { "source": "subquery_3", "target": "agent_rpa", "type": "ASSIGNED_TO" },
+          { "source": "agent_mfa", "target": "source_intapp", "type": "QUERIES" },
+          { "source": "source_intapp", "target": "wip_filter", "type": "FEEDS" },
+          { "source": "wip_filter", "target": "matter_abb_001", "type": "QUALIFIES" },
+          { "source": "wip_filter", "target": "matter_abb_002", "type": "QUALIFIES" },
+          { "source": "wip_filter", "target": "matter_abb_003", "type": "QUALIFIES" },
+          { "source": "wip_filter", "target": "matter_abb_004", "type": "QUALIFIES" },
+          { "source": "wip_filter", "target": "matter_ast_001", "type": "QUALIFIES" },
+          { "source": "wip_filter", "target": "matter_ast_002", "type": "QUALIFIES" },
+          { "source": "wip_filter", "target": "matter_ast_003", "type": "QUALIFIES" },
+          { "source": "wip_filter", "target": "matter_ast_004", "type": "QUALIFIES" },
+          { "source": "wip_filter", "target": "matter_bp_001", "type": "QUALIFIES" },
+          { "source": "wip_filter", "target": "matter_bp_002", "type": "QUALIFIES" },
+          { "source": "wip_filter", "target": "matter_bp_003", "type": "QUALIFIES" },
+          { "source": "wip_filter", "target": "matter_bp_004", "type": "QUALIFIES" },
+          { "source": "matter_abb_001", "target": "wip_metric_abb_001", "type": "HAS_METRIC" },
+          { "source": "matter_abb_002", "target": "wip_metric_abb_002", "type": "HAS_METRIC" },
+          { "source": "matter_ast_001", "target": "wip_metric_ast_001", "type": "HAS_METRIC" },
+          { "source": "matter_bp_001", "target": "wip_metric_bp_001", "type": "HAS_METRIC" },
+          { "source": "client_abbott", "target": "matter_abb_001", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_002", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_003", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_004", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_001", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_002", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_003", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_004", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_001", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_002", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_003", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_004", "type": "HAS_MATTER" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "matter_finance_agent",
+          "name": "Matter Finance Agent",
+          "status": "active",
+          "action": "Computing WIP age from time entries"
+        },
+        {
+          "id": "revenue_protection_agent",
+          "name": "Revenue Protection Agent",
+          "status": "active",
+          "action": "Cross-validating WIP against billing records"
+        }
+      ],
+      "sources": [
+        {
+          "id": "elite_pms",
+          "name": "Elite (PMS)",
+          "type": "Practice Management System",
+          "status": "complete",
+          "recordsReturned": 47
+        },
+        {
+          "id": "elite_billing",
+          "name": "Elite (Billing)",
+          "type": "Financial System",
+          "status": "complete",
+          "recordsReturned": 23
+        },
+        {
+          "id": "intapp_time",
+          "name": "Intapp Time",
+          "type": "Time Recording System",
+          "status": "querying",
+          "recordsReturned": 1247
+        }
+      ],
+      "result": {
+        "mattersWithWipOver60d": 12,
+        "avgWipAgeRange": "61-103 days",
+        "status": "WIP age filter applied"
+      }
+    },
+    {
+      "stepNumber": 5,
+      "phase": "CLIENT_ENRICHMENT",
+      "message": "Enriching results with client relationship data and organizing by client hierarchy...",
+      "details": "Querying PeopleSoft CRM for client metadata. Resolving entity relationships and building final hierarchy.",
+      "duration": 2000,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "subquery_4",
+            "type": "SubQuery",
+            "label": "Organize by Client",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "agent_mfa",
+            "type": "Agent",
+            "label": "Matter Finance Agent",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "source_crm",
+            "type": "Source",
+            "label": "PeopleSoft (CRM)",
+            "status": "querying",
+            "properties": {
+              "system": "Client Relationship Management"
+            }
+          },
+          {
+            "id": "client_abbott",
+            "type": "Client",
+            "label": "Abbott Laboratories",
+            "status": "enriched",
+            "properties": {
+              "industry": "Healthcare/Medical Devices",
+              "relationship": "Strategic",
+              "totalWipAtRisk": "$847,000",
+              "matterCount": 4
+            }
+          },
+          {
+            "id": "client_astra",
+            "type": "Client",
+            "label": "AstraZeneca PLC",
+            "status": "enriched",
+            "properties": {
+              "industry": "Pharmaceuticals",
+              "relationship": "Key Account",
+              "totalWipAtRisk": "$1,234,000",
+              "matterCount": 4
+            }
+          },
+          {
+            "id": "client_barclays",
+            "type": "Client",
+            "label": "Barclays PLC",
+            "status": "enriched",
+            "properties": {
+              "industry": "Energy/Oil & Gas",
+              "relationship": "Growing",
+              "totalWipAtRisk": "$623,000",
+              "matterCount": 4
+            }
+          },
+          {
+            "id": "matter_abb_001",
+            "type": "Matter",
+            "label": "2024-ABB-001",
+            "status": "final",
+            "properties": {
+              "name": "Exact Sciences Acquisition - Antitrust Regulatory Review",
+              "avgWipAge": 78,
+              "wipAmount": "$245,000"
+            }
+          },
+          {
+            "id": "matter_abb_002",
+            "type": "Matter",
+            "label": "2024-ABB-002",
+            "status": "final",
+            "properties": {
+              "name": "FreeStyle Libre 3 Sensor Recall - Product Liability Defense",
+              "avgWipAge": 92,
+              "wipAmount": "$312,000"
+            }
+          },
+          {
+            "id": "matter_abb_003",
+            "type": "Matter",
+            "label": "2024-ABB-003",
+            "status": "final",
+            "properties": {
+              "name": "Lingo Biowearable - Data Privacy Compliance",
+              "avgWipAge": 67,
+              "wipAmount": "$156,000"
+            }
+          },
+          {
+            "id": "matter_abb_004",
+            "type": "Matter",
+            "label": "2024-ABB-004",
+            "status": "final",
+            "properties": {
+              "name": "Volt Pulsed Field Ablation (PFA) System - IP Enforcement",
+              "avgWipAge": 84,
+              "wipAmount": "$134,000"
+            }
+          },
+          {
+            "id": "matter_ast_001",
+            "type": "Matter",
+            "label": "2024-MAT-00123",
+            "status": "final",
+            "properties": {
+              "name": "Farxiga Patent Litigation (New ANDA Challenge)",
+              "avgWipAge": 103,
+              "wipAmount": "$478,000"
+            }
+          },
+          {
+            "id": "matter_ast_002",
+            "type": "Matter",
+            "label": "2024-AST-002",
+            "status": "final",
+            "properties": {
+              "name": "Potential Acquisition of Oral GLP-1 Company",
+              "avgWipAge": 71,
+              "wipAmount": "$289,000"
+            }
+          },
+          {
+            "id": "matter_ast_003",
+            "type": "Matter",
+            "label": "2024-AST-003",
+            "status": "final",
+            "properties": {
+              "name": "Actinium-225 Supply Chain Security",
+              "avgWipAge": 88,
+              "wipAmount": "$267,000"
+            }
+          },
+          {
+            "id": "matter_ast_004",
+            "type": "Matter",
+            "label": "MAT-2024-004",
+            "status": "final",
+            "properties": {
+              "name": "Misconduct Allegation - China Anti-Corruption Probe",
+              "avgWipAge": 65,
+              "wipAmount": "$200,000"
+            }
+          },
+          {
+            "id": "matter_bp_001",
+            "type": "Matter",
+            "label": "2024-BP-001",
+            "status": "final",
+            "properties": {
+              "name": "Defense of Hussein Julood Gas Flaring Lawsuit",
+              "avgWipAge": 96,
+              "wipAmount": "$234,000"
+            }
+          },
+          {
+            "id": "matter_bp_002",
+            "type": "Matter",
+            "label": "2024-BP-002",
+            "status": "final",
+            "properties": {
+              "name": "Review and Potential Divestiture of Underperforming Renewable Assets",
+              "avgWipAge": 74,
+              "wipAmount": "$178,000"
+            }
+          },
+          {
+            "id": "matter_bp_003",
+            "type": "Matter",
+            "label": "2024-BP-003",
+            "status": "final",
+            "properties": {
+              "name": "ONGC Mumbai High Technical Services Contract Review",
+              "avgWipAge": 82,
+              "wipAmount": "$123,000"
+            }
+          },
+          {
+            "id": "matter_bp_004",
+            "type": "Matter",
+            "label": "2024-BP-004",
+            "status": "final",
+            "properties": {
+              "name": "Defense of Fuel Supply Lawsuit related to Israel/Gaza Conflict",
+              "avgWipAge": 61,
+              "wipAmount": "$88,000"
+            }
+          },
+          {
+            "id": "lineage_path",
+            "type": "Lineage",
+            "label": "Data Lineage",
+            "status": "complete",
+            "properties": {
+              "path": "Elite(PMS) → Elite(Billing) → Intapp Time → PeopleSoft(CRM)"
+            }
+          }
+        ],
+        "edges": [
+          { "source": "subquery_4", "target": "agent_mfa", "type": "ASSIGNED_TO" },
+          { "source": "agent_mfa", "target": "source_crm", "type": "QUERIES" },
+          { "source": "source_crm", "target": "client_abbott", "type": "ENRICHES" },
+          { "source": "source_crm", "target": "client_astra", "type": "ENRICHES" },
+          { "source": "source_crm", "target": "client_barclays", "type": "ENRICHES" },
+          { "source": "client_abbott", "target": "matter_abb_001", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_002", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_003", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_004", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_001", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_002", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_003", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_004", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_001", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_002", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_003", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_004", "type": "HAS_MATTER" },
+          { "source": "query_root", "target": "lineage_path", "type": "TRACED_BY" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "matter_finance_agent",
+          "name": "Matter Finance Agent",
+          "status": "active",
+          "action": "Enriching with CRM client data"
+        },
+        {
+          "id": "revenue_protection_agent",
+          "name": "Revenue Protection Agent",
+          "status": "complete",
+          "action": "Analysis complete"
+        }
+      ],
+      "sources": [
+        {
+          "id": "elite_pms",
+          "name": "Elite (PMS)",
+          "type": "Practice Management System",
+          "status": "complete",
+          "recordsReturned": 47
+        },
+        {
+          "id": "elite_billing",
+          "name": "Elite (Billing)",
+          "type": "Financial System",
+          "status": "complete",
+          "recordsReturned": 23
+        },
+        {
+          "id": "intapp_time",
+          "name": "Intapp Time",
+          "type": "Time Recording System",
+          "status": "complete",
+          "recordsReturned": 1247
+        },
+        {
+          "id": "peoplesoft_crm",
+          "name": "PeopleSoft (CRM)",
+          "type": "Client Relationship Management",
+          "status": "querying",
+          "recordsReturned": 3
+        }
+      ],
+      "result": {
+        "clientsWithAtRiskWip": 3,
+        "totalWipAtRisk": "$2,704,000",
+        "status": "Client hierarchy built"
+      }
+    },
+    {
+      "stepNumber": 6,
+      "phase": "RESPONSE_SYNTHESIS",
+      "message": "Synthesizing final response with consolidated view organized by client...",
+      "details": "All sub-queries complete. Building structured response with full data lineage and source attribution.",
+      "duration": 1500,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "answered",
+            "properties": {}
+          },
+          {
+            "id": "response",
+            "type": "Response",
+            "label": "Final Answer",
+            "status": "complete",
+            "properties": {
+              "confidence": 0.97
+            }
+          },
+          {
+            "id": "agent_mfa",
+            "type": "Agent",
+            "label": "Matter Finance Agent",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "agent_rpa",
+            "type": "Agent",
+            "label": "Revenue Protection Agent",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "client_abbott",
+            "type": "Client",
+            "label": "Abbott Laboratories",
+            "status": "final",
+            "properties": {
+              "matterCount": 4,
+              "totalWipAtRisk": "$847,000",
+              "avgWipAge": "80 days"
+            }
+          },
+          {
+            "id": "client_astra",
+            "type": "Client",
+            "label": "AstraZeneca PLC",
+            "status": "final",
+            "properties": {
+              "matterCount": 4,
+              "totalWipAtRisk": "$1,234,000",
+              "avgWipAge": "82 days"
+            }
+          },
+          {
+            "id": "client_barclays",
+            "type": "Client",
+            "label": "Barclays PLC",
+            "status": "final",
+            "properties": {
+              "matterCount": 4,
+              "totalWipAtRisk": "$623,000",
+              "avgWipAge": "78 days"
+            }
+          },
+          {
+            "id": "matter_abb_001",
+            "type": "Matter",
+            "label": "2024-ABB-001",
+            "status": "final",
+            "properties": {
+              "name": "Exact Sciences Acquisition - Antitrust Regulatory Review"
+            }
+          },
+          {
+            "id": "matter_abb_002",
+            "type": "Matter",
+            "label": "2024-ABB-002",
+            "status": "final",
+            "properties": {
+              "name": "FreeStyle Libre 3 Sensor Recall - Product Liability Defense"
+            }
+          },
+          {
+            "id": "matter_abb_003",
+            "type": "Matter",
+            "label": "2024-ABB-003",
+            "status": "final",
+            "properties": {
+              "name": "Lingo Biowearable - Data Privacy Compliance"
+            }
+          },
+          {
+            "id": "matter_abb_004",
+            "type": "Matter",
+            "label": "2024-ABB-004",
+            "status": "final",
+            "properties": {
+              "name": "Volt Pulsed Field Ablation (PFA) System - IP Enforcement"
+            }
+          },
+          {
+            "id": "matter_ast_001",
+            "type": "Matter",
+            "label": "2024-MAT-00123",
+            "status": "final",
+            "properties": {
+              "name": "Farxiga Patent Litigation (New ANDA Challenge)"
+            }
+          },
+          {
+            "id": "matter_ast_002",
+            "type": "Matter",
+            "label": "2024-AST-002",
+            "status": "final",
+            "properties": {
+              "name": "Potential Acquisition of Oral GLP-1 Company"
+            }
+          },
+          {
+            "id": "matter_ast_003",
+            "type": "Matter",
+            "label": "2024-AST-003",
+            "status": "final",
+            "properties": {
+              "name": "Actinium-225 Supply Chain Security"
+            }
+          },
+          {
+            "id": "matter_ast_004",
+            "type": "Matter",
+            "label": "MAT-2024-004",
+            "status": "final",
+            "properties": {
+              "name": "Misconduct Allegation - China Anti-Corruption Probe"
+            }
+          },
+          {
+            "id": "matter_bp_001",
+            "type": "Matter",
+            "label": "2024-BP-001",
+            "status": "final",
+            "properties": {
+              "name": "Defense of Hussein Julood Gas Flaring Lawsuit"
+            }
+          },
+          {
+            "id": "matter_bp_002",
+            "type": "Matter",
+            "label": "2024-BP-002",
+            "status": "final",
+            "properties": {
+              "name": "Review and Potential Divestiture of Underperforming Renewable Assets"
+            }
+          },
+          {
+            "id": "matter_bp_003",
+            "type": "Matter",
+            "label": "2024-BP-003",
+            "status": "final",
+            "properties": {
+              "name": "ONGC Mumbai High Technical Services Contract Review"
+            }
+          },
+          {
+            "id": "matter_bp_004",
+            "type": "Matter",
+            "label": "2024-BP-004",
+            "status": "final",
+            "properties": {
+              "name": "Defense of Fuel Supply Lawsuit related to Israel/Gaza Conflict"
+            }
+          },
+          {
+            "id": "lineage_complete",
+            "type": "Lineage",
+            "label": "Full Data Lineage",
+            "status": "verified",
+            "properties": {
+              "sources": 4,
+              "hops": 5,
+              "confidence": "97%"
+            }
+          }
+        ],
+        "edges": [
+          { "source": "query_root", "target": "response", "type": "PRODUCES" },
+          { "source": "agent_mfa", "target": "response", "type": "CONTRIBUTES_TO" },
+          { "source": "agent_rpa", "target": "response", "type": "CONTRIBUTES_TO" },
+          { "source": "response", "target": "client_abbott", "type": "CONTAINS" },
+          { "source": "response", "target": "client_astra", "type": "CONTAINS" },
+          { "source": "response", "target": "client_barclays", "type": "CONTAINS" },
+          { "source": "client_abbott", "target": "matter_abb_001", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_002", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_003", "type": "HAS_MATTER" },
+          { "source": "client_abbott", "target": "matter_abb_004", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_001", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_002", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_003", "type": "HAS_MATTER" },
+          { "source": "client_astra", "target": "matter_ast_004", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_001", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_002", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_003", "type": "HAS_MATTER" },
+          { "source": "client_barclays", "target": "matter_bp_004", "type": "HAS_MATTER" },
+          { "source": "response", "target": "lineage_complete", "type": "BACKED_BY" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "matter_finance_agent",
+          "name": "Matter Finance Agent",
+          "status": "complete",
+          "action": "Contributed matter and WIP analysis"
+        },
+        {
+          "id": "revenue_protection_agent",
+          "name": "Revenue Protection Agent",
+          "status": "complete",
+          "action": "Contributed billing gap detection"
+        }
+      ],
+      "sources": [
+        {
+          "id": "elite_pms",
+          "name": "Elite (PMS)",
+          "type": "Practice Management System",
+          "status": "complete",
+          "recordsReturned": 47
+        },
+        {
+          "id": "elite_billing",
+          "name": "Elite (Billing)",
+          "type": "Financial System",
+          "status": "complete",
+          "recordsReturned": 23
+        },
+        {
+          "id": "intapp_time",
+          "name": "Intapp Time",
+          "type": "Time Recording System",
+          "status": "complete",
+          "recordsReturned": 1247
+        },
+        {
+          "id": "peoplesoft_crm",
+          "name": "PeopleSoft (CRM)",
+          "type": "Client Relationship Management",
+          "status": "complete",
+          "recordsReturned": 3
+        }
+      ],
+      "result": {
+        "totalMatters": 12,
+        "totalClients": 3,
+        "totalWipAtRisk": "$2,704,000",
+        "status": "Query complete"
+      }
+    }
+  ],
+  "finalAnswer": {
+    "summary": "I have reviewed all active matters to identify those without billing activity in the last 30 days. Specifically, I have isolated matters where the average age of unbilled time exceeds 60 days. The following provides a consolidated view of these matters, categorized by client.",
+    "results": {
+      "Abbott Laboratories": [
+        {
+          "matterId": "2024-ABB-001",
+          "name": "Exact Sciences Acquisition - Antitrust Regulatory Review",
+          "avgWipAge": 78,
+          "daysSinceLastBilled": 45
+        },
+        {
+          "matterId": "2024-ABB-002",
+          "name": "FreeStyle Libre 3 Sensor Recall - Product Liability Defense",
+          "avgWipAge": 92,
+          "daysSinceLastBilled": 62
+        },
+        {
+          "matterId": "2024-ABB-003",
+          "name": "Lingo Biowearable - Data Privacy Compliance",
+          "avgWipAge": 67,
+          "daysSinceLastBilled": 38
+        },
+        {
+          "matterId": "2024-ABB-004",
+          "name": "Volt Pulsed Field Ablation (PFA) System - Intellectual Property Enforcement",
+          "avgWipAge": 84,
+          "daysSinceLastBilled": 51
+        }
+      ],
+      "AstraZeneca PLC": [
+        {
+          "matterId": "2024-MAT-00123",
+          "name": "Farxiga Patent Litigation (New ANDA Challenge)",
+          "avgWipAge": 103,
+          "daysSinceLastBilled": 72
+        },
+        {
+          "matterId": "2024-AST-002",
+          "name": "Potential Acquisition of Oral GLP-1 Company",
+          "avgWipAge": 71,
+          "daysSinceLastBilled": 44
+        },
+        {
+          "matterId": "2024-AST-003",
+          "name": "Actinium-225 Supply Chain Security",
+          "avgWipAge": 88,
+          "daysSinceLastBilled": 55
+        },
+        {
+          "matterId": "MAT-2024-004",
+          "name": "Misconduct Allegation - China Anti-Corruption Probe",
+          "avgWipAge": 65,
+          "daysSinceLastBilled": 33
+        }
+      ],
+      "Barclays PLC": [
+        {
+          "matterId": "2024-BP-001",
+          "name": "Defense of Hussein Julood Gas Flaring Lawsuit",
+          "avgWipAge": 96,
+          "daysSinceLastBilled": 68
+        },
+        {
+          "matterId": "2024-BP-002",
+          "name": "Review and Potential Divestiture of Underperforming Renewable Assets",
+          "avgWipAge": 74,
+          "daysSinceLastBilled": 41
+        },
+        {
+          "matterId": "2024-BP-003",
+          "name": "ONGC Mumbai High Technical Services Contract Review and Compliance",
+          "avgWipAge": 82,
+          "daysSinceLastBilled": 49
+        },
+        {
+          "matterId": "2024-BP-004",
+          "name": "Defense of Fuel Supply Lawsuit related to Israel/Gaza Conflict",
+          "avgWipAge": 61,
+          "daysSinceLastBilled": 35
+        }
+      ]
+    },
+    "lineage": {
+      "sources": ["Elite (PMS)", "Elite (Billing)", "Intapp Time", "PeopleSoft (CRM)"],
+      "agents": ["Matter Finance Agent", "Revenue Protection Agent"],
+      "queryPath": "Elite(PMS).Matters → Elite(Billing).Invoices → Intapp.TimeEntries → PeopleSoft(CRM).Clients",
+      "confidence": 0.97
+    }
+  },
+  "metadata": {
+    "totalDuration": 13700,
+    "graphOperations": 6,
+    "sourcesQueried": 4,
+    "agentsUsed": 2,
+    "entitiesResolved": 15
+  }
+}
