@@ -103,64 +103,53 @@
             }
           },
           {
-            "id": "client_acme",
+            "id": "client_abbott",
             "type": "Client",
-            "label": "Acme Corporation",
+            "label": "Abbott Laboratories",
             "status": "discovered",
             "properties": {
-              "industry": "Technology",
+              "industry": "Healthcare",
               "lastContact": "45 days ago"
             }
           },
           {
-            "id": "client_globalbank",
+            "id": "client_astrazeneca",
             "type": "Client",
-            "label": "GlobalBank Inc",
+            "label": "AstraZeneca PLC",
             "status": "discovered",
             "properties": {
-              "industry": "Financial Services",
+              "industry": "Pharmaceuticals",
               "lastContact": "38 days ago"
             }
           },
           {
-            "id": "client_medpharm",
+            "id": "client_closebrothers",
             "type": "Client",
-            "label": "MedPharm Ltd",
+            "label": "Close Brothers Group plc",
             "status": "discovered",
             "properties": {
-              "industry": "Healthcare",
+              "industry": "Financial Services",
               "lastContact": "52 days ago"
             }
           },
           {
-            "id": "client_energyfirst",
+            "id": "client_harbourenergy",
             "type": "Client",
-            "label": "EnergyFirst Corp",
+            "label": "Harbour Energy plc",
             "status": "discovered",
             "properties": {
               "industry": "Energy",
               "lastContact": "41 days ago"
-            }
-          },
-          {
-            "id": "client_retailmax",
-            "type": "Client",
-            "label": "RetailMax Group",
-            "status": "discovered",
-            "properties": {
-              "industry": "Retail",
-              "lastContact": "33 days ago"
             }
           }
         ],
         "edges": [
           { "source": "subquery_1", "target": "agent_cia", "type": "ASSIGNED_TO" },
           { "source": "agent_cia", "target": "source_crm", "type": "QUERIES" },
-          { "source": "source_crm", "target": "client_acme", "type": "RETURNS" },
-          { "source": "source_crm", "target": "client_globalbank", "type": "RETURNS" },
-          { "source": "source_crm", "target": "client_medpharm", "type": "RETURNS" },
-          { "source": "source_crm", "target": "client_energyfirst", "type": "RETURNS" },
-          { "source": "source_crm", "target": "client_retailmax", "type": "RETURNS" }
+          { "source": "source_crm", "target": "client_abbott", "type": "RETURNS" },
+          { "source": "source_crm", "target": "client_astrazeneca", "type": "RETURNS" },
+          { "source": "source_crm", "target": "client_closebrothers", "type": "RETURNS" },
+          { "source": "source_crm", "target": "client_harbourenergy", "type": "RETURNS" }
         ]
       },
       "agents": [
@@ -177,12 +166,12 @@
           "name": "CRM System",
           "type": "Client Relationship Management",
           "status": "querying",
-          "recordsReturned": 5
+          "recordsReturned": 4
         }
       ],
       "result": {
-        "inactiveClients": 5,
-        "avgDaysSinceContact": 42,
+        "inactiveClients": 4,
+        "avgDaysSinceContact": 44,
         "status": "Inactive clients identified"
       }
     },
@@ -259,53 +248,43 @@
             }
           },
           {
-            "id": "client_acme",
+            "id": "client_abbott",
             "type": "Client",
-            "label": "Acme Corporation",
+            "label": "Abbott Laboratories",
             "status": "checking",
             "properties": {
-              "lifetimeProfit": "$2.4M",
-              "profitability": "12%"
+              "lifetimeProfit": "$4.2M",
+              "profitability": "16%"
             }
           },
           {
-            "id": "client_globalbank",
+            "id": "client_astrazeneca",
             "type": "Client",
-            "label": "GlobalBank Inc",
+            "label": "AstraZeneca PLC",
             "status": "checking",
             "properties": {
-              "lifetimeProfit": "$5.1M",
-              "profitability": "18%"
+              "lifetimeProfit": "$5.8M",
+              "profitability": "19%"
             }
           },
           {
-            "id": "client_medpharm",
+            "id": "client_closebrothers",
             "type": "Client",
-            "label": "MedPharm Ltd",
+            "label": "Close Brothers Group plc",
             "status": "checking",
             "properties": {
-              "lifetimeProfit": "$3.8M",
-              "profitability": "15%"
+              "lifetimeProfit": "$2.1M",
+              "profitability": "11%"
             }
           },
           {
-            "id": "client_energyfirst",
+            "id": "client_harbourenergy",
             "type": "Client",
-            "label": "EnergyFirst Corp",
+            "label": "Harbour Energy plc",
             "status": "checking",
             "properties": {
-              "lifetimeProfit": "$1.9M",
-              "profitability": "9%"
-            }
-          },
-          {
-            "id": "client_retailmax",
-            "type": "Client",
-            "label": "RetailMax Group",
-            "status": "checking",
-            "properties": {
-              "lifetimeProfit": "$890K",
-              "profitability": "7%"
+              "lifetimeProfit": "$3.4M",
+              "profitability": "14%"
             }
           },
           {
@@ -326,11 +305,10 @@
           { "source": "agent_eaa", "target": "source_hr", "type": "QUERIES" },
           { "source": "source_billing", "target": "filter_engagement", "type": "FEEDS" },
           { "source": "source_time", "target": "filter_engagement", "type": "FEEDS" },
-          { "source": "filter_engagement", "target": "client_acme", "type": "EVALUATES" },
-          { "source": "filter_engagement", "target": "client_globalbank", "type": "EVALUATES" },
-          { "source": "filter_engagement", "target": "client_medpharm", "type": "EVALUATES" },
-          { "source": "filter_engagement", "target": "client_energyfirst", "type": "EVALUATES" },
-          { "source": "filter_engagement", "target": "client_retailmax", "type": "EVALUATES" }
+          { "source": "filter_engagement", "target": "client_abbott", "type": "EVALUATES" },
+          { "source": "filter_engagement", "target": "client_astrazeneca", "type": "EVALUATES" },
+          { "source": "filter_engagement", "target": "client_closebrothers", "type": "EVALUATES" },
+          { "source": "filter_engagement", "target": "client_harbourenergy", "type": "EVALUATES" }
         ]
       },
       "agents": [
@@ -353,7 +331,7 @@
           "name": "CRM System",
           "type": "Client Relationship Management",
           "status": "complete",
-          "recordsReturned": 5
+          "recordsReturned": 4
         },
         {
           "id": "billing_system",
@@ -378,8 +356,8 @@
         }
       ],
       "result": {
-        "clientsAnalyzed": 5,
-        "avgLifetimeProfit": "$2.8M",
+        "clientsAnalyzed": 4,
+        "avgLifetimeProfit": "$3.9M",
         "status": "Engagement patterns analyzed"
       }
     },
@@ -452,68 +430,53 @@
             }
           },
           {
-            "id": "client_acme",
+            "id": "client_abbott",
             "type": "Client",
-            "label": "Acme Corporation",
-            "status": "enriched",
-            "properties": {
-              "industry": "Technology",
-              "marketGrowth": "12.5%"
-            }
-          },
-          {
-            "id": "client_globalbank",
-            "type": "Client",
-            "label": "GlobalBank Inc",
-            "status": "enriched",
-            "properties": {
-              "industry": "Financial Services",
-              "marketGrowth": "8.2%"
-            }
-          },
-          {
-            "id": "client_medpharm",
-            "type": "Client",
-            "label": "MedPharm Ltd",
+            "label": "Abbott Laboratories",
             "status": "enriched",
             "properties": {
               "industry": "Healthcare",
-              "marketGrowth": "15.3%"
+              "marketGrowth": "14.2%",
+              "marketInsight": "FDA approval pipeline expansion"
             }
           },
           {
-            "id": "client_energyfirst",
+            "id": "client_astrazeneca",
             "type": "Client",
-            "label": "EnergyFirst Corp",
+            "label": "AstraZeneca PLC",
+            "status": "enriched",
+            "properties": {
+              "industry": "Pharmaceuticals",
+              "marketGrowth": "16.8%",
+              "marketInsight": "Oncology drug approvals surge"
+            }
+          },
+          {
+            "id": "client_closebrothers",
+            "type": "Client",
+            "label": "Close Brothers Group plc",
+            "status": "enriched",
+            "properties": {
+              "industry": "Financial Services",
+              "marketGrowth": "7.4%",
+              "marketInsight": "UK merchant banking regulatory changes"
+            }
+          },
+          {
+            "id": "client_harbourenergy",
+            "type": "Client",
+            "label": "Harbour Energy plc",
             "status": "enriched",
             "properties": {
               "industry": "Energy",
-              "marketGrowth": "6.1%"
+              "marketGrowth": "9.1%",
+              "marketInsight": "North Sea asset consolidation"
             }
           },
           {
-            "id": "client_retailmax",
-            "type": "Client",
-            "label": "RetailMax Group",
-            "status": "enriched",
-            "properties": {
-              "industry": "Retail",
-              "marketGrowth": "4.8%"
-            }
-          },
-          {
-            "id": "metric_tech",
+            "id": "metric_pharma",
             "type": "Metric",
-            "label": "Tech +12.5%",
-            "status": "calculated",
-            "properties": {
-              "type": "MARKET_GROWTH"
-            }
-          },
-          {
-            "id": "metric_health",
-            "type": "Metric",
-            "label": "Health +15.3%",
+            "label": "Pharma +16.8%",
             "status": "calculated",
             "properties": {
               "type": "MARKET_GROWTH",
@@ -521,9 +484,19 @@
             }
           },
           {
-            "id": "metric_finance",
+            "id": "metric_health",
             "type": "Metric",
-            "label": "Finance +8.2%",
+            "label": "Health +14.2%",
+            "status": "calculated",
+            "properties": {
+              "type": "MARKET_GROWTH",
+              "alert": "HIGH"
+            }
+          },
+          {
+            "id": "metric_energy",
+            "type": "Metric",
+            "label": "Energy +9.1%",
             "status": "calculated",
             "properties": {
               "type": "MARKET_GROWTH"
@@ -536,14 +509,13 @@
           { "source": "agent_mra", "target": "source_statista", "type": "QUERIES" },
           { "source": "agent_mra", "target": "source_gartner", "type": "QUERIES" },
           { "source": "agent_mra", "target": "source_industry", "type": "QUERIES" },
-          { "source": "source_statista", "target": "client_acme", "type": "ENRICHES" },
-          { "source": "source_statista", "target": "client_retailmax", "type": "ENRICHES" },
-          { "source": "source_gartner", "target": "client_globalbank", "type": "ENRICHES" },
-          { "source": "source_gartner", "target": "client_medpharm", "type": "ENRICHES" },
-          { "source": "source_industry", "target": "client_energyfirst", "type": "ENRICHES" },
-          { "source": "client_acme", "target": "metric_tech", "type": "HAS_METRIC" },
-          { "source": "client_medpharm", "target": "metric_health", "type": "HAS_METRIC" },
-          { "source": "client_globalbank", "target": "metric_finance", "type": "HAS_METRIC" }
+          { "source": "source_statista", "target": "client_abbott", "type": "ENRICHES" },
+          { "source": "source_statista", "target": "client_closebrothers", "type": "ENRICHES" },
+          { "source": "source_gartner", "target": "client_astrazeneca", "type": "ENRICHES" },
+          { "source": "source_industry", "target": "client_harbourenergy", "type": "ENRICHES" },
+          { "source": "client_astrazeneca", "target": "metric_pharma", "type": "HAS_METRIC" },
+          { "source": "client_abbott", "target": "metric_health", "type": "HAS_METRIC" },
+          { "source": "client_harbourenergy", "target": "metric_energy", "type": "HAS_METRIC" }
         ]
       },
       "agents": [
@@ -566,21 +538,21 @@
           "name": "CRM System",
           "type": "Client Relationship Management",
           "status": "complete",
-          "recordsReturned": 5
+          "recordsReturned": 4
         },
         {
           "id": "billing_system",
           "name": "Billing System",
           "type": "Financial/Billing",
           "status": "complete",
-          "recordsReturned": 847
+          "recordsReturned": 623
         },
         {
           "id": "time_recording",
           "name": "Time Recording",
           "type": "Time & Activity",
           "status": "complete",
-          "recordsReturned": 2341
+          "recordsReturned": 1847
         },
         {
           "id": "statista",
@@ -605,7 +577,7 @@
         }
       ],
       "result": {
-        "marketsAnalyzed": 5,
+        "marketsAnalyzed": 4,
         "highGrowthSectors": 2,
         "status": "Market data enrichment complete"
       }
@@ -647,73 +619,63 @@
             "properties": {}
           },
           {
-            "id": "client_acme",
+            "id": "client_abbott",
             "type": "Client",
-            "label": "Acme Corporation",
-            "status": "final",
-            "properties": {
-              "industry": "Technology",
-              "lifetimeProfit": "$2.4M",
-              "profitability": "12%",
-              "marketGrowth": "12.5%",
-              "leverageRatio": "3.2",
-              "quadrant": "High Growth / Medium Profit"
-            }
-          },
-          {
-            "id": "client_globalbank",
-            "type": "Client",
-            "label": "GlobalBank Inc",
-            "status": "final",
-            "properties": {
-              "industry": "Financial Services",
-              "lifetimeProfit": "$5.1M",
-              "profitability": "18%",
-              "marketGrowth": "8.2%",
-              "leverageRatio": "2.8",
-              "quadrant": "Medium Growth / High Profit"
-            }
-          },
-          {
-            "id": "client_medpharm",
-            "type": "Client",
-            "label": "MedPharm Ltd",
+            "label": "Abbott Laboratories",
             "status": "final",
             "properties": {
               "industry": "Healthcare",
-              "lifetimeProfit": "$3.8M",
-              "profitability": "15%",
-              "marketGrowth": "15.3%",
-              "leverageRatio": "4.1",
-              "quadrant": "High Growth / High Profit"
+              "lifetimeProfit": "$4.2M",
+              "profitability": "16%",
+              "marketGrowth": "14.2%",
+              "leverageRatio": "3.8",
+              "quadrant": "High Growth / High Profit",
+              "outreachReason": "FDA approval pipeline expansion - regulatory support opportunities"
             }
           },
           {
-            "id": "client_energyfirst",
+            "id": "client_astrazeneca",
             "type": "Client",
-            "label": "EnergyFirst Corp",
+            "label": "AstraZeneca PLC",
+            "status": "final",
+            "properties": {
+              "industry": "Pharmaceuticals",
+              "lifetimeProfit": "$5.8M",
+              "profitability": "19%",
+              "marketGrowth": "16.8%",
+              "leverageRatio": "4.2",
+              "quadrant": "High Growth / High Profit",
+              "outreachReason": "Oncology drug approvals - IP and licensing support"
+            }
+          },
+          {
+            "id": "client_closebrothers",
+            "type": "Client",
+            "label": "Close Brothers Group plc",
+            "status": "final",
+            "properties": {
+              "industry": "Financial Services",
+              "lifetimeProfit": "$2.1M",
+              "profitability": "11%",
+              "marketGrowth": "7.4%",
+              "leverageRatio": "2.3",
+              "quadrant": "Medium Growth / Medium Profit",
+              "outreachReason": "UK regulatory changes - compliance advisory"
+            }
+          },
+          {
+            "id": "client_harbourenergy",
+            "type": "Client",
+            "label": "Harbour Energy plc",
             "status": "final",
             "properties": {
               "industry": "Energy",
-              "lifetimeProfit": "$1.9M",
-              "profitability": "9%",
-              "marketGrowth": "6.1%",
-              "leverageRatio": "1.9",
-              "quadrant": "Low Growth / Low Profit"
-            }
-          },
-          {
-            "id": "client_retailmax",
-            "type": "Client",
-            "label": "RetailMax Group",
-            "status": "final",
-            "properties": {
-              "industry": "Retail",
-              "lifetimeProfit": "$890K",
-              "profitability": "7%",
-              "marketGrowth": "4.8%",
-              "leverageRatio": "2.1",
-              "quadrant": "Low Growth / Low Profit"
+              "lifetimeProfit": "$3.4M",
+              "profitability": "14%",
+              "marketGrowth": "9.1%",
+              "leverageRatio": "3.1",
+              "quadrant": "Medium Growth / High Profit",
+              "outreachReason": "North Sea asset consolidation - M&A and regulatory support"
             }
           },
           {
@@ -752,46 +714,46 @@
           "name": "CRM System",
           "type": "Client Relationship Management",
           "status": "complete",
-          "recordsReturned": 5
+          "recordsReturned": 4
         },
         {
           "id": "billing_system",
           "name": "Billing System",
           "type": "Financial/Billing",
           "status": "complete",
-          "recordsReturned": 847
+          "recordsReturned": 623
         },
         {
           "id": "time_recording",
           "name": "Time Recording",
           "type": "Time & Activity",
           "status": "complete",
-          "recordsReturned": 2341
+          "recordsReturned": 1847
         },
         {
           "id": "statista",
           "name": "Statista",
           "type": "Market Statistics (OSINT)",
           "status": "complete",
-          "recordsReturned": 15
+          "recordsReturned": 12
         },
         {
           "id": "gartner",
           "name": "Gartner",
           "type": "Industry Research (OSINT)",
           "status": "complete",
-          "recordsReturned": 8
+          "recordsReturned": 6
         },
         {
           "id": "industry_publications",
           "name": "Industry Publications",
           "type": "Trade Publications (OSINT)",
           "status": "complete",
-          "recordsReturned": 12
+          "recordsReturned": 9
         }
       ],
       "result": {
-        "clientsScored": 5,
+        "clientsScored": 4,
         "highPriorityOutreach": 2,
         "status": "Bubble matrix metrics calculated"
       }
@@ -843,37 +805,30 @@
             "properties": {}
           },
           {
-            "id": "client_acme",
+            "id": "client_abbott",
             "type": "Client",
-            "label": "Acme Corporation",
+            "label": "Abbott Laboratories",
             "status": "final",
             "properties": {}
           },
           {
-            "id": "client_globalbank",
+            "id": "client_astrazeneca",
             "type": "Client",
-            "label": "GlobalBank Inc",
+            "label": "AstraZeneca PLC",
             "status": "final",
             "properties": {}
           },
           {
-            "id": "client_medpharm",
+            "id": "client_closebrothers",
             "type": "Client",
-            "label": "MedPharm Ltd",
+            "label": "Close Brothers Group plc",
             "status": "final",
             "properties": {}
           },
           {
-            "id": "client_energyfirst",
+            "id": "client_harbourenergy",
             "type": "Client",
-            "label": "EnergyFirst Corp",
-            "status": "final",
-            "properties": {}
-          },
-          {
-            "id": "client_retailmax",
-            "type": "Client",
-            "label": "RetailMax Group",
+            "label": "Harbour Energy plc",
             "status": "final",
             "properties": {}
           },
@@ -894,11 +849,10 @@
           { "source": "agent_cia", "target": "response", "type": "CONTRIBUTES_TO" },
           { "source": "agent_eaa", "target": "response", "type": "CONTRIBUTES_TO" },
           { "source": "agent_mra", "target": "response", "type": "CONTRIBUTES_TO" },
-          { "source": "response", "target": "client_acme", "type": "CONTAINS" },
-          { "source": "response", "target": "client_globalbank", "type": "CONTAINS" },
-          { "source": "response", "target": "client_medpharm", "type": "CONTAINS" },
-          { "source": "response", "target": "client_energyfirst", "type": "CONTAINS" },
-          { "source": "response", "target": "client_retailmax", "type": "CONTAINS" },
+          { "source": "response", "target": "client_abbott", "type": "CONTAINS" },
+          { "source": "response", "target": "client_astrazeneca", "type": "CONTAINS" },
+          { "source": "response", "target": "client_closebrothers", "type": "CONTAINS" },
+          { "source": "response", "target": "client_harbourenergy", "type": "CONTAINS" },
           { "source": "response", "target": "lineage_complete", "type": "BACKED_BY" }
         ]
       },
@@ -928,91 +882,83 @@
           "name": "CRM System",
           "type": "Client Relationship Management",
           "status": "complete",
-          "recordsReturned": 5
+          "recordsReturned": 4
         },
         {
           "id": "billing_system",
           "name": "Billing System",
           "type": "Financial/Billing",
           "status": "complete",
-          "recordsReturned": 847
+          "recordsReturned": 623
         },
         {
           "id": "time_recording",
           "name": "Time Recording",
           "type": "Time & Activity",
           "status": "complete",
-          "recordsReturned": 2341
+          "recordsReturned": 1847
         },
         {
           "id": "statista",
           "name": "Statista",
           "type": "Market Statistics (OSINT)",
           "status": "complete",
-          "recordsReturned": 15
+          "recordsReturned": 12
         },
         {
           "id": "gartner",
           "name": "Gartner",
           "type": "Industry Research (OSINT)",
           "status": "complete",
-          "recordsReturned": 8
+          "recordsReturned": 6
         },
         {
           "id": "industry_publications",
           "name": "Industry Publications",
           "type": "Trade Publications (OSINT)",
           "status": "complete",
-          "recordsReturned": 12
+          "recordsReturned": 9
         }
       ],
       "result": {
-        "totalClients": 5,
+        "totalClients": 4,
         "highPriorityOutreach": 2,
-        "totalLifetimeValue": "$14.1M",
+        "totalLifetimeValue": "$15.5M",
         "status": "Query complete"
       }
     }
   ],
   "finalAnswer": {
-    "summary": "I have identified 5 clients with no engagement in the last 30 days. By cross-referencing internal data with external market intelligence, I've positioned each client on a 2x2 Bubble Matrix to prioritize outreach opportunities based on market growth potential and client profitability.",
+    "summary": "I have identified 4 clients with no engagement in the last 30 days. By cross-referencing internal data with external market intelligence, I've positioned each client on a 2x2 Bubble Matrix to prioritize outreach opportunities based on market growth potential and client profitability.",
     "results": {
       "High Growth / High Profit": [
         {
-          "matterId": "client_medpharm",
-          "name": "MedPharm Ltd",
-          "avgWipAge": 52,
-          "daysSinceLastBilled": 52
-        }
-      ],
-      "High Growth / Medium Profit": [
+          "matterId": "client_astrazeneca",
+          "name": "AstraZeneca PLC - Oncology drug approvals surge",
+          "avgWipAge": 38,
+          "daysSinceLastBilled": 38
+        },
         {
-          "matterId": "client_acme",
-          "name": "Acme Corporation",
+          "matterId": "client_abbott",
+          "name": "Abbott Laboratories - FDA approval pipeline expansion",
           "avgWipAge": 45,
           "daysSinceLastBilled": 45
         }
       ],
       "Medium Growth / High Profit": [
         {
-          "matterId": "client_globalbank",
-          "name": "GlobalBank Inc",
-          "avgWipAge": 38,
-          "daysSinceLastBilled": 38
-        }
-      ],
-      "Low Growth / Low Profit": [
-        {
-          "matterId": "client_energyfirst",
-          "name": "EnergyFirst Corp",
+          "matterId": "client_harbourenergy",
+          "name": "Harbour Energy plc - North Sea asset consolidation",
           "avgWipAge": 41,
           "daysSinceLastBilled": 41
-        },
+        }
+      ],
+      "Medium Growth / Medium Profit": [
         {
-          "matterId": "client_retailmax",
-          "name": "RetailMax Group",
-          "avgWipAge": 33,
-          "daysSinceLastBilled": 33
+          "matterId": "client_closebrothers",
+          "name": "Close Brothers Group plc - UK regulatory changes",
+          "avgWipAge": 52,
+          "daysSinceLastBilled": 52
         }
       ]
     },
@@ -1028,6 +974,6 @@
     "graphOperations": 6,
     "sourcesQueried": 7,
     "agentsUsed": 3,
-    "entitiesResolved": 5
+    "entitiesResolved": 4
   }
 }

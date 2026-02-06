@@ -2,8 +2,9 @@ import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import type { DemoAnimation, AnimationStep, GraphNode, GraphEdge } from '../types';
 import demoDataBilling from '../data/demoData.json';
 import demoDataEngagement from '../data/demoClientEngagement.json';
+import demoDataReputation from '../data/demoReputationalRisk.json';
 
-export type DemoType = 'billing' | 'engagement';
+export type DemoType = 'billing' | 'engagement' | 'reputation';
 
 interface UseLegalFabDemoReturn {
   // State
@@ -50,9 +51,14 @@ export function useLegalFabDemo(demoType: DemoType = 'billing'): UseLegalFabDemo
 
   // Select demo data based on type
   const data = useMemo(() => {
-    return demoType === 'engagement'
-      ? (demoDataEngagement as DemoAnimation)
-      : (demoDataBilling as DemoAnimation);
+    switch (demoType) {
+      case 'engagement':
+        return demoDataEngagement as DemoAnimation;
+      case 'reputation':
+        return demoDataReputation as DemoAnimation;
+      default:
+        return demoDataBilling as DemoAnimation;
+    }
   }, [demoType]);
 
   const totalSteps = data.totalSteps;

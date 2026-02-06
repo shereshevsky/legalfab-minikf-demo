@@ -1,6 +1,6 @@
 import { Scale, Sparkles, ChevronDown } from 'lucide-react';
 
-export type DemoType = 'billing' | 'engagement';
+export type DemoType = 'billing' | 'engagement' | 'reputation';
 
 interface HeaderProps {
   selectedDemo: DemoType;
@@ -10,6 +10,7 @@ interface HeaderProps {
 const DEMO_OPTIONS = [
   { value: 'billing' as DemoType, label: 'WIP & Billing Analysis' },
   { value: 'engagement' as DemoType, label: 'Client Engagement & Market Insights' },
+  { value: 'reputation' as DemoType, label: 'Reputational Risk Analysis' },
 ];
 
 export function Header({ selectedDemo, onDemoChange }: HeaderProps) {

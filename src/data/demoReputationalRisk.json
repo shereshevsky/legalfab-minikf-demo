@@ -1,0 +1,1141 @@
+{
+  "query": "Which clients or matters present an increased reputational risk to the firm according to recent market sentiment or media coverage?",
+  "totalSteps": 6,
+  "steps": [
+    {
+      "stepNumber": 1,
+      "phase": "QUERY_ANALYSIS",
+      "message": "Analyzing query to identify reputational risk indicators and media monitoring requirements...",
+      "details": "Decomposing question into sub-queries: (1) Active clients/matters, (2) Media coverage analysis, (3) Sentiment scoring, (4) Risk assessment",
+      "duration": 2000,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "active",
+            "properties": {
+              "text": "Reputational risk from market sentiment & media"
+            }
+          },
+          {
+            "id": "subquery_1",
+            "type": "SubQuery",
+            "label": "Get Active Clients",
+            "status": "pending",
+            "properties": {}
+          },
+          {
+            "id": "subquery_2",
+            "type": "SubQuery",
+            "label": "Scan Media Coverage",
+            "status": "pending",
+            "properties": {}
+          },
+          {
+            "id": "subquery_3",
+            "type": "SubQuery",
+            "label": "Analyze Sentiment",
+            "status": "pending",
+            "properties": {}
+          },
+          {
+            "id": "subquery_4",
+            "type": "SubQuery",
+            "label": "Calculate Risk Scores",
+            "status": "pending",
+            "properties": {}
+          }
+        ],
+        "edges": [
+          { "source": "query_root", "target": "subquery_1", "type": "DECOMPOSES_TO" },
+          { "source": "query_root", "target": "subquery_2", "type": "DECOMPOSES_TO" },
+          { "source": "query_root", "target": "subquery_3", "type": "DECOMPOSES_TO" },
+          { "source": "query_root", "target": "subquery_4", "type": "DECOMPOSES_TO" },
+          { "source": "subquery_1", "target": "subquery_2", "type": "PRECEDES" },
+          { "source": "subquery_2", "target": "subquery_3", "type": "PRECEDES" },
+          { "source": "subquery_3", "target": "subquery_4", "type": "PRECEDES" }
+        ]
+      },
+      "agents": [],
+      "sources": [],
+      "result": null
+    },
+    {
+      "stepNumber": 2,
+      "phase": "MATTER_RETRIEVAL",
+      "message": "Retrieving active clients and matters from Practice Management and CRM systems...",
+      "details": "Querying Elite PMS for active matters and PeopleSoft CRM for client profiles and key contacts.",
+      "duration": 4000,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "subquery_1",
+            "type": "SubQuery",
+            "label": "Get Active Clients",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "agent_sla",
+            "type": "Agent",
+            "label": "Social Listening Agent",
+            "status": "active",
+            "properties": {
+              "capability": "Media Monitoring & Sentiment Analysis"
+            }
+          },
+          {
+            "id": "source_elite_pms",
+            "type": "Source",
+            "label": "Elite (PMS)",
+            "status": "querying",
+            "properties": {
+              "system": "Practice Management System"
+            }
+          },
+          {
+            "id": "source_crm",
+            "type": "Source",
+            "label": "PeopleSoft (CRM)",
+            "status": "querying",
+            "properties": {
+              "system": "Client Relationship Management"
+            }
+          },
+          {
+            "id": "client_astrazeneca",
+            "type": "Client",
+            "label": "AstraZeneca",
+            "status": "discovered",
+            "properties": {
+              "industry": "Pharmaceuticals",
+              "activeMatters": 4
+            }
+          },
+          {
+            "id": "client_abbott",
+            "type": "Client",
+            "label": "Abbott",
+            "status": "discovered",
+            "properties": {
+              "industry": "Healthcare",
+              "activeMatters": 3
+            }
+          },
+          {
+            "id": "client_pfizer",
+            "type": "Client",
+            "label": "Pfizer Inc.",
+            "status": "discovered",
+            "properties": {
+              "industry": "Pharmaceuticals",
+              "activeMatters": 5
+            }
+          },
+          {
+            "id": "client_goldman",
+            "type": "Client",
+            "label": "Goldman Sachs",
+            "status": "discovered",
+            "properties": {
+              "industry": "Financial Services",
+              "activeMatters": 6
+            }
+          },
+          {
+            "id": "client_microsoft",
+            "type": "Client",
+            "label": "Microsoft",
+            "status": "discovered",
+            "properties": {
+              "industry": "Technology",
+              "activeMatters": 4
+            }
+          },
+          {
+            "id": "client_tesla",
+            "type": "Client",
+            "label": "Tesla Motors",
+            "status": "discovered",
+            "properties": {
+              "industry": "Automotive/Energy",
+              "activeMatters": 7
+            }
+          },
+          {
+            "id": "client_amazon",
+            "type": "Client",
+            "label": "Amazon",
+            "status": "discovered",
+            "properties": {
+              "industry": "Technology/Retail",
+              "activeMatters": 8
+            }
+          }
+        ],
+        "edges": [
+          { "source": "subquery_1", "target": "agent_sla", "type": "ASSIGNED_TO" },
+          { "source": "agent_sla", "target": "source_elite_pms", "type": "QUERIES" },
+          { "source": "agent_sla", "target": "source_crm", "type": "QUERIES" },
+          { "source": "source_elite_pms", "target": "client_astrazeneca", "type": "RETURNS" },
+          { "source": "source_elite_pms", "target": "client_abbott", "type": "RETURNS" },
+          { "source": "source_elite_pms", "target": "client_pfizer", "type": "RETURNS" },
+          { "source": "source_elite_pms", "target": "client_goldman", "type": "RETURNS" },
+          { "source": "source_elite_pms", "target": "client_microsoft", "type": "RETURNS" },
+          { "source": "source_elite_pms", "target": "client_tesla", "type": "RETURNS" },
+          { "source": "source_elite_pms", "target": "client_amazon", "type": "RETURNS" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "social_listening_agent",
+          "name": "Social Listening Agent",
+          "status": "active",
+          "action": "Retrieving client portfolio from internal systems"
+        }
+      ],
+      "sources": [
+        {
+          "id": "elite_pms",
+          "name": "Elite (PMS)",
+          "type": "Practice Management System",
+          "status": "querying",
+          "recordsReturned": null
+        },
+        {
+          "id": "peoplesoft_crm",
+          "name": "PeopleSoft (CRM)",
+          "type": "Client Relationship Management",
+          "status": "querying",
+          "recordsReturned": null
+        }
+      ],
+      "result": {
+        "clientsFound": 7,
+        "activeMatters": 37,
+        "status": "Client portfolio retrieved"
+      }
+    },
+    {
+      "stepNumber": 3,
+      "phase": "BILLING_ANALYSIS",
+      "message": "Cross-referencing billing data to identify high-value client relationships...",
+      "details": "Analyzing billing history to prioritize clients by revenue impact and matter significance.",
+      "duration": 4500,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "subquery_2",
+            "type": "SubQuery",
+            "label": "Scan Media Coverage",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "agent_sla",
+            "type": "Agent",
+            "label": "Social Listening Agent",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "source_elite_pms",
+            "type": "Source",
+            "label": "Elite (PMS)",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "source_crm",
+            "type": "Source",
+            "label": "PeopleSoft (CRM)",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "source_billing",
+            "type": "Source",
+            "label": "Elite (Billing)",
+            "status": "querying",
+            "properties": {
+              "system": "Financial/Billing"
+            }
+          },
+          {
+            "id": "client_astrazeneca",
+            "type": "Client",
+            "label": "AstraZeneca",
+            "status": "checking",
+            "properties": {
+              "annualRevenue": "$2.8M",
+              "priority": "High"
+            }
+          },
+          {
+            "id": "client_abbott",
+            "type": "Client",
+            "label": "Abbott",
+            "status": "checking",
+            "properties": {
+              "annualRevenue": "$1.9M",
+              "priority": "High"
+            }
+          },
+          {
+            "id": "client_pfizer",
+            "type": "Client",
+            "label": "Pfizer Inc.",
+            "status": "checking",
+            "properties": {
+              "annualRevenue": "$4.2M",
+              "priority": "Critical"
+            }
+          },
+          {
+            "id": "client_goldman",
+            "type": "Client",
+            "label": "Goldman Sachs",
+            "status": "checking",
+            "properties": {
+              "annualRevenue": "$5.1M",
+              "priority": "Critical"
+            }
+          },
+          {
+            "id": "client_microsoft",
+            "type": "Client",
+            "label": "Microsoft",
+            "status": "checking",
+            "properties": {
+              "annualRevenue": "$3.6M",
+              "priority": "High"
+            }
+          },
+          {
+            "id": "client_tesla",
+            "type": "Client",
+            "label": "Tesla Motors",
+            "status": "checking",
+            "properties": {
+              "annualRevenue": "$2.4M",
+              "priority": "High"
+            }
+          },
+          {
+            "id": "client_amazon",
+            "type": "Client",
+            "label": "Amazon",
+            "status": "checking",
+            "properties": {
+              "annualRevenue": "$6.8M",
+              "priority": "Critical"
+            }
+          },
+          {
+            "id": "filter_priority",
+            "type": "Filter",
+            "label": "High Priority Clients",
+            "status": "active",
+            "properties": {
+              "criteria": "revenue > $1M OR strategic = true"
+            }
+          }
+        ],
+        "edges": [
+          { "source": "subquery_2", "target": "agent_sla", "type": "ASSIGNED_TO" },
+          { "source": "agent_sla", "target": "source_billing", "type": "QUERIES" },
+          { "source": "source_billing", "target": "filter_priority", "type": "FEEDS" },
+          { "source": "filter_priority", "target": "client_astrazeneca", "type": "EVALUATES" },
+          { "source": "filter_priority", "target": "client_abbott", "type": "EVALUATES" },
+          { "source": "filter_priority", "target": "client_pfizer", "type": "EVALUATES" },
+          { "source": "filter_priority", "target": "client_goldman", "type": "EVALUATES" },
+          { "source": "filter_priority", "target": "client_microsoft", "type": "EVALUATES" },
+          { "source": "filter_priority", "target": "client_tesla", "type": "EVALUATES" },
+          { "source": "filter_priority", "target": "client_amazon", "type": "EVALUATES" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "social_listening_agent",
+          "name": "Social Listening Agent",
+          "status": "active",
+          "action": "Analyzing billing data for client prioritization"
+        }
+      ],
+      "sources": [
+        {
+          "id": "elite_pms",
+          "name": "Elite (PMS)",
+          "type": "Practice Management System",
+          "status": "complete",
+          "recordsReturned": 37
+        },
+        {
+          "id": "peoplesoft_crm",
+          "name": "PeopleSoft (CRM)",
+          "type": "Client Relationship Management",
+          "status": "complete",
+          "recordsReturned": 7
+        },
+        {
+          "id": "elite_billing",
+          "name": "Elite (Billing)",
+          "type": "Financial/Billing",
+          "status": "querying",
+          "recordsReturned": null
+        }
+      ],
+      "result": {
+        "highPriorityClients": 7,
+        "totalAnnualRevenue": "$26.8M",
+        "status": "Client prioritization complete"
+      }
+    },
+    {
+      "stepNumber": 4,
+      "phase": "WIP_CALCULATION",
+      "message": "Social Listening Agent scanning external sources for media coverage and sentiment...",
+      "details": "Aggregating mentions from social media, news outlets, regulatory filings, and court records. Analyzing context and assessing reputational impact.",
+      "duration": 5500,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "subquery_3",
+            "type": "SubQuery",
+            "label": "Analyze Sentiment",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "agent_sla",
+            "type": "Agent",
+            "label": "Social Listening Agent",
+            "status": "active",
+            "properties": {
+              "capability": "Media Monitoring & Sentiment Analysis"
+            }
+          },
+          {
+            "id": "source_social",
+            "type": "MarketData",
+            "label": "Social Media",
+            "status": "querying",
+            "properties": {
+              "system": "Social Media Aggregator",
+              "platforms": "Twitter, LinkedIn, Reddit"
+            }
+          },
+          {
+            "id": "source_news",
+            "type": "MarketData",
+            "label": "News Outlets",
+            "status": "querying",
+            "properties": {
+              "system": "News API",
+              "sources": "Reuters, Bloomberg, WSJ"
+            }
+          },
+          {
+            "id": "source_regulatory",
+            "type": "MarketData",
+            "label": "Regulatory Filings",
+            "status": "querying",
+            "properties": {
+              "system": "SEC EDGAR, FDA, FTC",
+              "dataType": "Public Filings"
+            }
+          },
+          {
+            "id": "source_court",
+            "type": "MarketData",
+            "label": "Court Records",
+            "status": "querying",
+            "properties": {
+              "system": "PACER, State Courts",
+              "dataType": "Litigation Data"
+            }
+          },
+          {
+            "id": "client_astrazeneca",
+            "type": "Client",
+            "label": "AstraZeneca",
+            "status": "enriched",
+            "properties": {
+              "riskFlag": "Legal & Compliance Failures",
+              "sentiment": -0.58,
+              "mentions": 723
+            }
+          },
+          {
+            "id": "client_abbott",
+            "type": "Client",
+            "label": "Abbott",
+            "status": "enriched",
+            "properties": {
+              "riskFlag": "Supply Chain Issues",
+              "sentiment": -0.45,
+              "mentions": 412
+            }
+          },
+          {
+            "id": "client_pfizer",
+            "type": "Client",
+            "label": "Pfizer Inc.",
+            "status": "enriched",
+            "properties": {
+              "riskFlag": "Governance & Ethics Lapses",
+              "sentiment": -0.62,
+              "mentions": 891
+            }
+          },
+          {
+            "id": "client_goldman",
+            "type": "Client",
+            "label": "Goldman Sachs",
+            "status": "enriched",
+            "properties": {
+              "riskFlag": "Employee Misconduct / Management",
+              "sentiment": -0.71,
+              "mentions": 1456
+            }
+          },
+          {
+            "id": "client_microsoft",
+            "type": "Client",
+            "label": "Microsoft",
+            "status": "enriched",
+            "properties": {
+              "riskFlag": "Operational Failure",
+              "sentiment": -0.38,
+              "mentions": 567
+            }
+          },
+          {
+            "id": "client_tesla",
+            "type": "Client",
+            "label": "Tesla Motors",
+            "status": "enriched",
+            "properties": {
+              "riskFlag": "Customer Service Failures",
+              "sentiment": -0.74,
+              "mentions": 2134
+            }
+          },
+          {
+            "id": "client_amazon",
+            "type": "Client",
+            "label": "Amazon",
+            "status": "enriched",
+            "properties": {
+              "riskFlag": "Employee Misconduct / Management",
+              "sentiment": -0.52,
+              "mentions": 1823
+            }
+          },
+          {
+            "id": "metric_goldman",
+            "type": "Metric",
+            "label": "Risk: HIGH",
+            "status": "calculated",
+            "properties": {
+              "type": "RISK_SCORE",
+              "alert": "HIGH"
+            }
+          },
+          {
+            "id": "metric_tesla",
+            "type": "Metric",
+            "label": "Risk: CRITICAL",
+            "status": "calculated",
+            "properties": {
+              "type": "RISK_SCORE",
+              "alert": "CRITICAL"
+            }
+          },
+          {
+            "id": "metric_pfizer",
+            "type": "Metric",
+            "label": "Risk: HIGH",
+            "status": "calculated",
+            "properties": {
+              "type": "RISK_SCORE",
+              "alert": "HIGH"
+            }
+          }
+        ],
+        "edges": [
+          { "source": "subquery_3", "target": "agent_sla", "type": "ASSIGNED_TO" },
+          { "source": "agent_sla", "target": "source_social", "type": "QUERIES" },
+          { "source": "agent_sla", "target": "source_news", "type": "QUERIES" },
+          { "source": "agent_sla", "target": "source_regulatory", "type": "QUERIES" },
+          { "source": "agent_sla", "target": "source_court", "type": "QUERIES" },
+          { "source": "source_social", "target": "client_tesla", "type": "ENRICHES" },
+          { "source": "source_social", "target": "client_amazon", "type": "ENRICHES" },
+          { "source": "source_news", "target": "client_goldman", "type": "ENRICHES" },
+          { "source": "source_news", "target": "client_pfizer", "type": "ENRICHES" },
+          { "source": "source_regulatory", "target": "client_astrazeneca", "type": "ENRICHES" },
+          { "source": "source_regulatory", "target": "client_pfizer", "type": "ENRICHES" },
+          { "source": "source_court", "target": "client_abbott", "type": "ENRICHES" },
+          { "source": "source_court", "target": "client_microsoft", "type": "ENRICHES" },
+          { "source": "client_goldman", "target": "metric_goldman", "type": "HAS_METRIC" },
+          { "source": "client_tesla", "target": "metric_tesla", "type": "HAS_METRIC" },
+          { "source": "client_pfizer", "target": "metric_pfizer", "type": "HAS_METRIC" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "social_listening_agent",
+          "name": "Social Listening Agent",
+          "status": "active",
+          "action": "Scanning external sources for media coverage and sentiment"
+        }
+      ],
+      "sources": [
+        {
+          "id": "elite_pms",
+          "name": "Elite (PMS)",
+          "type": "Practice Management System",
+          "status": "complete",
+          "recordsReturned": 37
+        },
+        {
+          "id": "elite_billing",
+          "name": "Elite (Billing)",
+          "type": "Financial/Billing",
+          "status": "complete",
+          "recordsReturned": 1247
+        },
+        {
+          "id": "social_media",
+          "name": "Social Media",
+          "type": "Social Media Aggregator (OSINT)",
+          "status": "querying",
+          "recordsReturned": null
+        },
+        {
+          "id": "news_outlets",
+          "name": "News Outlets",
+          "type": "News API (OSINT)",
+          "status": "querying",
+          "recordsReturned": null
+        },
+        {
+          "id": "regulatory_filings",
+          "name": "Regulatory Filings",
+          "type": "SEC/FDA/FTC Filings (OSINT)",
+          "status": "querying",
+          "recordsReturned": null
+        },
+        {
+          "id": "court_records",
+          "name": "Court Records",
+          "type": "PACER/State Courts (OSINT)",
+          "status": "querying",
+          "recordsReturned": null
+        }
+      ],
+      "result": {
+        "clientsWithRiskFlags": 7,
+        "highRiskClients": 3,
+        "totalMentions": 8006,
+        "status": "Media sentiment analysis complete"
+      }
+    },
+    {
+      "stepNumber": 5,
+      "phase": "CLIENT_ENRICHMENT",
+      "message": "Calculating final risk scores and generating reputational impact assessments...",
+      "details": "Combining internal client data with external sentiment analysis. Ranking clients by reputational risk to the firm.",
+      "duration": 4000,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "subquery_4",
+            "type": "SubQuery",
+            "label": "Calculate Risk Scores",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "agent_sla",
+            "type": "Agent",
+            "label": "Social Listening Agent",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "client_astrazeneca",
+            "type": "Client",
+            "label": "AstraZeneca",
+            "status": "final",
+            "properties": {
+              "industry": "Pharmaceuticals",
+              "riskLevel": "MEDIUM",
+              "riskFlag": "Legal & Compliance Failures - FDA warning letters",
+              "sentiment": -0.58,
+              "mentions": 723,
+              "annualRevenue": "$2.8M",
+              "recommendation": "Monitor regulatory developments"
+            }
+          },
+          {
+            "id": "client_abbott",
+            "type": "Client",
+            "label": "Abbott",
+            "status": "final",
+            "properties": {
+              "industry": "Healthcare",
+              "riskLevel": "MEDIUM",
+              "riskFlag": "Supply Chain Issues - Product recalls",
+              "sentiment": -0.45,
+              "mentions": 412,
+              "annualRevenue": "$1.9M",
+              "recommendation": "Standard monitoring"
+            }
+          },
+          {
+            "id": "client_pfizer",
+            "type": "Client",
+            "label": "Pfizer Inc.",
+            "status": "final",
+            "properties": {
+              "industry": "Pharmaceuticals",
+              "riskLevel": "HIGH",
+              "riskFlag": "Governance & Ethics Lapses - Executive investigation",
+              "sentiment": -0.62,
+              "mentions": 891,
+              "annualRevenue": "$4.2M",
+              "recommendation": "Engage partners for review"
+            }
+          },
+          {
+            "id": "client_goldman",
+            "type": "Client",
+            "label": "Goldman Sachs",
+            "status": "final",
+            "properties": {
+              "industry": "Financial Services",
+              "riskLevel": "HIGH",
+              "riskFlag": "Employee Misconduct / Management - Compliance violations",
+              "sentiment": -0.71,
+              "mentions": 1456,
+              "annualRevenue": "$5.1M",
+              "recommendation": "Immediate partner escalation"
+            }
+          },
+          {
+            "id": "client_microsoft",
+            "type": "Client",
+            "label": "Microsoft",
+            "status": "final",
+            "properties": {
+              "industry": "Technology",
+              "riskLevel": "LOW",
+              "riskFlag": "Operational Failure - Service outages",
+              "sentiment": -0.38,
+              "mentions": 567,
+              "annualRevenue": "$3.6M",
+              "recommendation": "Standard monitoring"
+            }
+          },
+          {
+            "id": "client_tesla",
+            "type": "Client",
+            "label": "Tesla Motors",
+            "status": "final",
+            "properties": {
+              "industry": "Automotive/Energy",
+              "riskLevel": "CRITICAL",
+              "riskFlag": "Customer Service Failures - Safety recalls, NHTSA investigations",
+              "sentiment": -0.74,
+              "mentions": 2134,
+              "annualRevenue": "$2.4M",
+              "recommendation": "IMMEDIATE partner escalation required"
+            }
+          },
+          {
+            "id": "client_amazon",
+            "type": "Client",
+            "label": "Amazon",
+            "status": "final",
+            "properties": {
+              "industry": "Technology/Retail",
+              "riskLevel": "MEDIUM",
+              "riskFlag": "Employee Misconduct / Management - Labor disputes",
+              "sentiment": -0.52,
+              "mentions": 1823,
+              "annualRevenue": "$6.8M",
+              "recommendation": "Monitor labor relations"
+            }
+          },
+          {
+            "id": "lineage_path",
+            "type": "Lineage",
+            "label": "Data Lineage",
+            "status": "complete",
+            "properties": {
+              "path": "Elite(PMS) → Elite(Billing) → CRM → Social → News → Regulatory → Courts"
+            }
+          }
+        ],
+        "edges": [
+          { "source": "subquery_4", "target": "agent_sla", "type": "ASSIGNED_TO" },
+          { "source": "query_root", "target": "lineage_path", "type": "TRACED_BY" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "social_listening_agent",
+          "name": "Social Listening Agent",
+          "status": "active",
+          "action": "Calculating final risk scores and recommendations"
+        }
+      ],
+      "sources": [
+        {
+          "id": "elite_pms",
+          "name": "Elite (PMS)",
+          "type": "Practice Management System",
+          "status": "complete",
+          "recordsReturned": 37
+        },
+        {
+          "id": "elite_billing",
+          "name": "Elite (Billing)",
+          "type": "Financial/Billing",
+          "status": "complete",
+          "recordsReturned": 1247
+        },
+        {
+          "id": "peoplesoft_crm",
+          "name": "PeopleSoft (CRM)",
+          "type": "Client Relationship Management",
+          "status": "complete",
+          "recordsReturned": 7
+        },
+        {
+          "id": "social_media",
+          "name": "Social Media",
+          "type": "Social Media Aggregator (OSINT)",
+          "status": "complete",
+          "recordsReturned": 4523
+        },
+        {
+          "id": "news_outlets",
+          "name": "News Outlets",
+          "type": "News API (OSINT)",
+          "status": "complete",
+          "recordsReturned": 2156
+        },
+        {
+          "id": "regulatory_filings",
+          "name": "Regulatory Filings",
+          "type": "SEC/FDA/FTC Filings (OSINT)",
+          "status": "complete",
+          "recordsReturned": 89
+        },
+        {
+          "id": "court_records",
+          "name": "Court Records",
+          "type": "PACER/State Courts (OSINT)",
+          "status": "complete",
+          "recordsReturned": 34
+        }
+      ],
+      "result": {
+        "criticalRisk": 1,
+        "highRisk": 2,
+        "mediumRisk": 3,
+        "lowRisk": 1,
+        "status": "Risk assessment complete"
+      }
+    },
+    {
+      "stepNumber": 6,
+      "phase": "RESPONSE_SYNTHESIS",
+      "message": "Synthesizing final reputational risk report with actionable recommendations...",
+      "details": "All sub-queries complete. Building structured risk assessment with client rankings and recommended actions.",
+      "duration": 4500,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "answered",
+            "properties": {}
+          },
+          {
+            "id": "response",
+            "type": "Response",
+            "label": "Risk Assessment",
+            "status": "complete",
+            "properties": {
+              "confidence": 0.89,
+              "reportType": "Reputational Risk Analysis"
+            }
+          },
+          {
+            "id": "agent_sla",
+            "type": "Agent",
+            "label": "Social Listening Agent",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "client_tesla",
+            "type": "Client",
+            "label": "Tesla Motors",
+            "status": "final",
+            "properties": {
+              "riskLevel": "CRITICAL"
+            }
+          },
+          {
+            "id": "client_goldman",
+            "type": "Client",
+            "label": "Goldman Sachs",
+            "status": "final",
+            "properties": {
+              "riskLevel": "HIGH"
+            }
+          },
+          {
+            "id": "client_pfizer",
+            "type": "Client",
+            "label": "Pfizer Inc.",
+            "status": "final",
+            "properties": {
+              "riskLevel": "HIGH"
+            }
+          },
+          {
+            "id": "client_astrazeneca",
+            "type": "Client",
+            "label": "AstraZeneca",
+            "status": "final",
+            "properties": {
+              "riskLevel": "MEDIUM"
+            }
+          },
+          {
+            "id": "client_amazon",
+            "type": "Client",
+            "label": "Amazon",
+            "status": "final",
+            "properties": {
+              "riskLevel": "MEDIUM"
+            }
+          },
+          {
+            "id": "client_abbott",
+            "type": "Client",
+            "label": "Abbott",
+            "status": "final",
+            "properties": {
+              "riskLevel": "MEDIUM"
+            }
+          },
+          {
+            "id": "client_microsoft",
+            "type": "Client",
+            "label": "Microsoft",
+            "status": "final",
+            "properties": {
+              "riskLevel": "LOW"
+            }
+          },
+          {
+            "id": "lineage_complete",
+            "type": "Lineage",
+            "label": "Full Data Lineage",
+            "status": "verified",
+            "properties": {
+              "sources": 7,
+              "hops": 4,
+              "confidence": "89%"
+            }
+          }
+        ],
+        "edges": [
+          { "source": "query_root", "target": "response", "type": "PRODUCES" },
+          { "source": "agent_sla", "target": "response", "type": "CONTRIBUTES_TO" },
+          { "source": "response", "target": "client_tesla", "type": "CONTAINS" },
+          { "source": "response", "target": "client_goldman", "type": "CONTAINS" },
+          { "source": "response", "target": "client_pfizer", "type": "CONTAINS" },
+          { "source": "response", "target": "client_astrazeneca", "type": "CONTAINS" },
+          { "source": "response", "target": "client_amazon", "type": "CONTAINS" },
+          { "source": "response", "target": "client_abbott", "type": "CONTAINS" },
+          { "source": "response", "target": "client_microsoft", "type": "CONTAINS" },
+          { "source": "response", "target": "lineage_complete", "type": "BACKED_BY" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "social_listening_agent",
+          "name": "Social Listening Agent",
+          "status": "complete",
+          "action": "Completed reputational risk analysis"
+        }
+      ],
+      "sources": [
+        {
+          "id": "elite_pms",
+          "name": "Elite (PMS)",
+          "type": "Practice Management System",
+          "status": "complete",
+          "recordsReturned": 37
+        },
+        {
+          "id": "elite_billing",
+          "name": "Elite (Billing)",
+          "type": "Financial/Billing",
+          "status": "complete",
+          "recordsReturned": 1247
+        },
+        {
+          "id": "peoplesoft_crm",
+          "name": "PeopleSoft (CRM)",
+          "type": "Client Relationship Management",
+          "status": "complete",
+          "recordsReturned": 7
+        },
+        {
+          "id": "social_media",
+          "name": "Social Media",
+          "type": "Social Media Aggregator (OSINT)",
+          "status": "complete",
+          "recordsReturned": 4523
+        },
+        {
+          "id": "news_outlets",
+          "name": "News Outlets",
+          "type": "News API (OSINT)",
+          "status": "complete",
+          "recordsReturned": 2156
+        },
+        {
+          "id": "regulatory_filings",
+          "name": "Regulatory Filings",
+          "type": "SEC/FDA/FTC Filings (OSINT)",
+          "status": "complete",
+          "recordsReturned": 89
+        },
+        {
+          "id": "court_records",
+          "name": "Court Records",
+          "type": "PACER/State Courts (OSINT)",
+          "status": "complete",
+          "recordsReturned": 34
+        }
+      ],
+      "result": {
+        "totalClients": 7,
+        "criticalRisk": 1,
+        "highRisk": 2,
+        "mediumRisk": 3,
+        "lowRisk": 1,
+        "revenueAtRisk": "$26.8M",
+        "status": "Query complete"
+      }
+    }
+  ],
+  "finalAnswer": {
+    "summary": "I have analyzed 7 active clients against recent media coverage, social sentiment, regulatory filings, and court records. Three clients present elevated reputational risk requiring immediate attention, with Tesla Motors flagged as CRITICAL due to ongoing NHTSA safety investigations and customer service failures.",
+    "results": {
+      "CRITICAL Risk": [
+        {
+          "matterId": "client_tesla",
+          "name": "Tesla Motors - Customer Service Failures",
+          "avgWipAge": 74,
+          "daysSinceLastBilled": 8
+        }
+      ],
+      "HIGH Risk": [
+        {
+          "matterId": "client_goldman",
+          "name": "Goldman Sachs - Employee Misconduct / Management",
+          "avgWipAge": 71,
+          "daysSinceLastBilled": 12
+        },
+        {
+          "matterId": "client_pfizer",
+          "name": "Pfizer Inc. - Governance & Ethics Lapses",
+          "avgWipAge": 62,
+          "daysSinceLastBilled": 15
+        }
+      ],
+      "MEDIUM Risk": [
+        {
+          "matterId": "client_astrazeneca",
+          "name": "AstraZeneca - Legal & Compliance Failures",
+          "avgWipAge": 58,
+          "daysSinceLastBilled": 10
+        },
+        {
+          "matterId": "client_amazon",
+          "name": "Amazon - Employee Misconduct / Management",
+          "avgWipAge": 52,
+          "daysSinceLastBilled": 5
+        },
+        {
+          "matterId": "client_abbott",
+          "name": "Abbott - Supply Chain Issues",
+          "avgWipAge": 45,
+          "daysSinceLastBilled": 18
+        }
+      ],
+      "LOW Risk": [
+        {
+          "matterId": "client_microsoft",
+          "name": "Microsoft - Operational Failure",
+          "avgWipAge": 38,
+          "daysSinceLastBilled": 7
+        }
+      ]
+    },
+    "lineage": {
+      "sources": ["Elite (PMS)", "Elite (Billing)", "PeopleSoft (CRM)", "Social Media", "News Outlets", "Regulatory Filings", "Court Records"],
+      "agents": ["Social Listening Agent"],
+      "queryPath": "Elite(PMS) → Elite(Billing) → PeopleSoft(CRM) → Social Media → News → Regulatory → Courts",
+      "confidence": 0.89
+    }
+  },
+  "metadata": {
+    "totalDuration": 24500,
+    "graphOperations": 6,
+    "sourcesQueried": 7,
+    "agentsUsed": 1,
+    "entitiesResolved": 7
+  }
+}
