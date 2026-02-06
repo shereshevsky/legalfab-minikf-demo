@@ -58,6 +58,11 @@ const NODE_STYLES: Record<string, { gradient: [string, string]; glow: string; ic
     glow: 'rgba(34, 197, 94, 0.6)',
     icon: 'M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z'
   },
+  MarketData: {
+    gradient: ['#ec4899', '#db2777'],
+    glow: 'rgba(236, 72, 153, 0.5)',
+    icon: 'M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418'
+  },
 };
 
 // Column-based layout for clear hierarchy
@@ -66,6 +71,7 @@ const COLUMNS = {
   SubQuery: { x: 200, width: 50 },
   Agent: { x: 340, width: 55 },
   Source: { x: 480, width: 55 },
+  MarketData: { x: 550, width: 50 },
   Filter: { x: 620, width: 50 },
   Client: { x: 760, width: 55 },
   Matter: { x: 900, width: 45 },
@@ -80,6 +86,7 @@ const NODE_SIZES: Record<string, number> = {
   SubQuery: 36,
   Agent: 44,
   Source: 42,
+  MarketData: 42,
   Filter: 38,
   Client: 42,
   Matter: 32,
@@ -457,7 +464,7 @@ export function FixedGraphVisualization({ nodes, edges }: FixedGraphVisualizatio
       <div className="absolute bottom-4 left-4 glass rounded-xl p-4 backdrop-blur-xl border border-slate-700/50">
         <p className="text-xs text-slate-400 mb-3 font-semibold uppercase tracking-wider">Node Types</p>
         <div className="grid grid-cols-2 gap-x-6 gap-y-2">
-          {['Query', 'Agent', 'Source', 'Client', 'Matter', 'Filter'].map(type => {
+          {['Query', 'Agent', 'Source', 'MarketData', 'Client', 'Filter'].map(type => {
             const style = NODE_STYLES[type];
             return (
               <div key={type} className="flex items-center gap-2">

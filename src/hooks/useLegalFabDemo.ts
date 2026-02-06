@@ -1,6 +1,9 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import type { DemoAnimation, AnimationStep, GraphNode, GraphEdge } from '../types';
-import demoData from '../data/demoData.json';
+import demoDataBilling from '../data/demoData.json';
+import demoDataEngagement from '../data/demoClientEngagement.json';
+
+export type DemoType = 'billing' | 'engagement';
 
 interface UseLegalFabDemoReturn {
   // State
@@ -13,12 +16,12 @@ interface UseLegalFabDemoReturn {
   activeAgents: string[];
   activeSources: string[];
   isAnimating: boolean;
-  
+
   // Data
   query: string;
   finalAnswer: DemoAnimation['finalAnswer'];
   metadata: DemoAnimation['metadata'];
-  
+
   // Controls
   play: () => void;
   pause: () => void;
@@ -26,13 +29,13 @@ interface UseLegalFabDemoReturn {
   nextStep: () => void;
   prevStep: () => void;
   goToStep: (step: number) => void;
-  
+
   // Computed
   isComplete: boolean;
   progress: number;
 }
 
-export function useLegalFabDemo(): UseLegalFabDemoReturn {
+export function useLegalFabDemo(demoType: DemoType = 'billing'): UseLegalFabDemoReturn {
   const [currentStep, setCurrentStep] = useState(-1);
   const [isPlaying, setIsPlaying] = useState(false);
   const [visibleNodes, setVisibleNodes] = useState<GraphNode[]>([]);
@@ -40,10 +43,18 @@ export function useLegalFabDemo(): UseLegalFabDemoReturn {
   const [activeAgents, setActiveAgents] = useState<string[]>([]);
   const [activeSources, setActiveSources] = useState<string[]>([]);
   const [isAnimating, setIsAnimating] = useState(false);
-  
+
   const animationTimeouts = useRef<ReturnType<typeof setTimeout>[]>([]);
   const isAnimatingRef = useRef(false);
-  const data = demoData as DemoAnimation;
+  const prevDemoType = useRef(demoType);
+
+  // Select demo data based on type
+  const data = useMemo(() => {
+    return demoType === 'engagement'
+      ? (demoDataEngagement as DemoAnimation)
+      : (demoDataBilling as DemoAnimation);
+  }, [demoType]);
+
   const totalSteps = data.totalSteps;
   const step = currentStep >= 0 ? data.steps[currentStep] : null;
 
@@ -52,6 +63,22 @@ export function useLegalFabDemo(): UseLegalFabDemoReturn {
     animationTimeouts.current.forEach(clearTimeout);
     animationTimeouts.current = [];
   }, []);
+
+  // Reset when demo type changes
+  useEffect(() => {
+    if (prevDemoType.current !== demoType) {
+      clearAnimations();
+      isAnimatingRef.current = false;
+      setCurrentStep(-1);
+      setIsPlaying(false);
+      setVisibleNodes([]);
+      setVisibleEdges([]);
+      setActiveAgents([]);
+      setActiveSources([]);
+      setIsAnimating(false);
+      prevDemoType.current = demoType;
+    }
+  }, [demoType, clearAnimations]);
 
   // Animate nodes and edges appearing
   useEffect(() => {
@@ -163,12 +190,12 @@ export function useLegalFabDemo(): UseLegalFabDemoReturn {
       const targetStep = currentStep - 1;
       setVisibleNodes([]);
       setVisibleEdges([]);
-      
+
       // Rebuild graph state up to target step
       setTimeout(() => {
         const allNodes: GraphNode[] = [];
         const allEdges: GraphEdge[] = [];
-        
+
         for (let i = 0; i <= targetStep; i++) {
           const s = data.steps[i];
           s.graph.nodes.forEach(node => {
@@ -182,7 +209,7 @@ export function useLegalFabDemo(): UseLegalFabDemoReturn {
             }
           });
         }
-        
+
         setVisibleNodes(allNodes);
         setVisibleEdges(allEdges);
         setCurrentStep(targetStep);
@@ -195,11 +222,11 @@ export function useLegalFabDemo(): UseLegalFabDemoReturn {
       // Reset and rebuild to target step
       setVisibleNodes([]);
       setVisibleEdges([]);
-      
+
       setTimeout(() => {
         const allNodes: GraphNode[] = [];
         const allEdges: GraphEdge[] = [];
-        
+
         for (let i = 0; i <= stepIndex; i++) {
           const s = data.steps[i];
           s.graph.nodes.forEach(node => {
@@ -216,7 +243,7 @@ export function useLegalFabDemo(): UseLegalFabDemoReturn {
             }
           });
         }
-        
+
         setVisibleNodes(allNodes);
         setVisibleEdges(allEdges);
         setCurrentStep(stepIndex);
@@ -234,18 +261,18 @@ export function useLegalFabDemo(): UseLegalFabDemoReturn {
     activeAgents,
     activeSources,
     isAnimating,
-    
+
     query: data.query,
     finalAnswer: data.finalAnswer,
     metadata: data.metadata,
-    
+
     play,
     pause,
     reset,
     nextStep,
     prevStep,
     goToStep,
-    
+
     isComplete: currentStep >= totalSteps - 1,
     progress: currentStep < 0 ? 0 : ((currentStep + 1) / totalSteps) * 100,
   };

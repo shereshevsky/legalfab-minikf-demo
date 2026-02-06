@@ -1,0 +1,1033 @@
+{
+  "query": "Which clients have not had any engagement in the last 30 days, and what market insights could be used as a reason to reach out to them?",
+  "totalSteps": 6,
+  "steps": [
+    {
+      "stepNumber": 1,
+      "phase": "QUERY_ANALYSIS",
+      "message": "Analyzing query to identify client engagement patterns and market insight requirements...",
+      "details": "Decomposing question into sub-queries: (1) Inactive clients, (2) Engagement history, (3) Market insights, (4) Outreach recommendations",
+      "duration": 2000,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "active",
+            "properties": {
+              "text": "Inactive clients + market insights for outreach"
+            }
+          },
+          {
+            "id": "subquery_1",
+            "type": "SubQuery",
+            "label": "Find Inactive Clients",
+            "status": "pending",
+            "properties": {}
+          },
+          {
+            "id": "subquery_2",
+            "type": "SubQuery",
+            "label": "Analyze Engagement",
+            "status": "pending",
+            "properties": {}
+          },
+          {
+            "id": "subquery_3",
+            "type": "SubQuery",
+            "label": "Gather Market Data",
+            "status": "pending",
+            "properties": {}
+          },
+          {
+            "id": "subquery_4",
+            "type": "SubQuery",
+            "label": "Generate Recommendations",
+            "status": "pending",
+            "properties": {}
+          }
+        ],
+        "edges": [
+          { "source": "query_root", "target": "subquery_1", "type": "DECOMPOSES_TO" },
+          { "source": "query_root", "target": "subquery_2", "type": "DECOMPOSES_TO" },
+          { "source": "query_root", "target": "subquery_3", "type": "DECOMPOSES_TO" },
+          { "source": "query_root", "target": "subquery_4", "type": "DECOMPOSES_TO" },
+          { "source": "subquery_1", "target": "subquery_2", "type": "PRECEDES" },
+          { "source": "subquery_2", "target": "subquery_3", "type": "PRECEDES" },
+          { "source": "subquery_3", "target": "subquery_4", "type": "PRECEDES" }
+        ]
+      },
+      "agents": [],
+      "sources": [],
+      "result": null
+    },
+    {
+      "stepNumber": 2,
+      "phase": "MATTER_RETRIEVAL",
+      "message": "Client Insights Agent querying CRM for clients with no engagement in last 30 days...",
+      "details": "Querying CRM system for last_contact_date > 30 days. Cross-referencing with billing activity.",
+      "duration": 4000,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "subquery_1",
+            "type": "SubQuery",
+            "label": "Find Inactive Clients",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "agent_cia",
+            "type": "Agent",
+            "label": "Client Insights Agent",
+            "status": "active",
+            "properties": {
+              "capability": "Client Relationship Analysis"
+            }
+          },
+          {
+            "id": "source_crm",
+            "type": "Source",
+            "label": "CRM System",
+            "status": "querying",
+            "properties": {
+              "system": "Client Relationship Management"
+            }
+          },
+          {
+            "id": "client_acme",
+            "type": "Client",
+            "label": "Acme Corporation",
+            "status": "discovered",
+            "properties": {
+              "industry": "Technology",
+              "lastContact": "45 days ago"
+            }
+          },
+          {
+            "id": "client_globalbank",
+            "type": "Client",
+            "label": "GlobalBank Inc",
+            "status": "discovered",
+            "properties": {
+              "industry": "Financial Services",
+              "lastContact": "38 days ago"
+            }
+          },
+          {
+            "id": "client_medpharm",
+            "type": "Client",
+            "label": "MedPharm Ltd",
+            "status": "discovered",
+            "properties": {
+              "industry": "Healthcare",
+              "lastContact": "52 days ago"
+            }
+          },
+          {
+            "id": "client_energyfirst",
+            "type": "Client",
+            "label": "EnergyFirst Corp",
+            "status": "discovered",
+            "properties": {
+              "industry": "Energy",
+              "lastContact": "41 days ago"
+            }
+          },
+          {
+            "id": "client_retailmax",
+            "type": "Client",
+            "label": "RetailMax Group",
+            "status": "discovered",
+            "properties": {
+              "industry": "Retail",
+              "lastContact": "33 days ago"
+            }
+          }
+        ],
+        "edges": [
+          { "source": "subquery_1", "target": "agent_cia", "type": "ASSIGNED_TO" },
+          { "source": "agent_cia", "target": "source_crm", "type": "QUERIES" },
+          { "source": "source_crm", "target": "client_acme", "type": "RETURNS" },
+          { "source": "source_crm", "target": "client_globalbank", "type": "RETURNS" },
+          { "source": "source_crm", "target": "client_medpharm", "type": "RETURNS" },
+          { "source": "source_crm", "target": "client_energyfirst", "type": "RETURNS" },
+          { "source": "source_crm", "target": "client_retailmax", "type": "RETURNS" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "client_insights_agent",
+          "name": "Client Insights Agent",
+          "status": "active",
+          "action": "Identifying inactive clients from CRM"
+        }
+      ],
+      "sources": [
+        {
+          "id": "crm_system",
+          "name": "CRM System",
+          "type": "Client Relationship Management",
+          "status": "querying",
+          "recordsReturned": 5
+        }
+      ],
+      "result": {
+        "inactiveClients": 5,
+        "avgDaysSinceContact": 42,
+        "status": "Inactive clients identified"
+      }
+    },
+    {
+      "stepNumber": 3,
+      "phase": "BILLING_ANALYSIS",
+      "message": "Engagement Analytics Agent analyzing billing, time, and HR data for engagement patterns...",
+      "details": "Cross-referencing billing activity, timekeeper assignments, and matter history for each inactive client.",
+      "duration": 5000,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "subquery_2",
+            "type": "SubQuery",
+            "label": "Analyze Engagement",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "agent_cia",
+            "type": "Agent",
+            "label": "Client Insights Agent",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "agent_eaa",
+            "type": "Agent",
+            "label": "Engagement Analytics Agent",
+            "status": "active",
+            "properties": {
+              "capability": "Engagement Pattern Analysis"
+            }
+          },
+          {
+            "id": "source_crm",
+            "type": "Source",
+            "label": "CRM System",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "source_billing",
+            "type": "Source",
+            "label": "Billing System",
+            "status": "querying",
+            "properties": {
+              "system": "Financial/Billing"
+            }
+          },
+          {
+            "id": "source_time",
+            "type": "Source",
+            "label": "Time Recording",
+            "status": "querying",
+            "properties": {
+              "system": "Time & Activity"
+            }
+          },
+          {
+            "id": "source_hr",
+            "type": "Source",
+            "label": "HR System",
+            "status": "querying",
+            "properties": {
+              "system": "Human Resources"
+            }
+          },
+          {
+            "id": "client_acme",
+            "type": "Client",
+            "label": "Acme Corporation",
+            "status": "checking",
+            "properties": {
+              "lifetimeProfit": "$2.4M",
+              "profitability": "12%"
+            }
+          },
+          {
+            "id": "client_globalbank",
+            "type": "Client",
+            "label": "GlobalBank Inc",
+            "status": "checking",
+            "properties": {
+              "lifetimeProfit": "$5.1M",
+              "profitability": "18%"
+            }
+          },
+          {
+            "id": "client_medpharm",
+            "type": "Client",
+            "label": "MedPharm Ltd",
+            "status": "checking",
+            "properties": {
+              "lifetimeProfit": "$3.8M",
+              "profitability": "15%"
+            }
+          },
+          {
+            "id": "client_energyfirst",
+            "type": "Client",
+            "label": "EnergyFirst Corp",
+            "status": "checking",
+            "properties": {
+              "lifetimeProfit": "$1.9M",
+              "profitability": "9%"
+            }
+          },
+          {
+            "id": "client_retailmax",
+            "type": "Client",
+            "label": "RetailMax Group",
+            "status": "checking",
+            "properties": {
+              "lifetimeProfit": "$890K",
+              "profitability": "7%"
+            }
+          },
+          {
+            "id": "filter_engagement",
+            "type": "Filter",
+            "label": "No Engagement >30d",
+            "status": "active",
+            "properties": {
+              "criteria": "last_activity > 30 days"
+            }
+          }
+        ],
+        "edges": [
+          { "source": "subquery_2", "target": "agent_eaa", "type": "ASSIGNED_TO" },
+          { "source": "agent_cia", "target": "agent_eaa", "type": "HANDS_OFF_TO" },
+          { "source": "agent_eaa", "target": "source_billing", "type": "QUERIES" },
+          { "source": "agent_eaa", "target": "source_time", "type": "QUERIES" },
+          { "source": "agent_eaa", "target": "source_hr", "type": "QUERIES" },
+          { "source": "source_billing", "target": "filter_engagement", "type": "FEEDS" },
+          { "source": "source_time", "target": "filter_engagement", "type": "FEEDS" },
+          { "source": "filter_engagement", "target": "client_acme", "type": "EVALUATES" },
+          { "source": "filter_engagement", "target": "client_globalbank", "type": "EVALUATES" },
+          { "source": "filter_engagement", "target": "client_medpharm", "type": "EVALUATES" },
+          { "source": "filter_engagement", "target": "client_energyfirst", "type": "EVALUATES" },
+          { "source": "filter_engagement", "target": "client_retailmax", "type": "EVALUATES" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "client_insights_agent",
+          "name": "Client Insights Agent",
+          "status": "complete",
+          "action": "Completed client identification"
+        },
+        {
+          "id": "engagement_analytics_agent",
+          "name": "Engagement Analytics Agent",
+          "status": "active",
+          "action": "Analyzing engagement patterns across systems"
+        }
+      ],
+      "sources": [
+        {
+          "id": "crm_system",
+          "name": "CRM System",
+          "type": "Client Relationship Management",
+          "status": "complete",
+          "recordsReturned": 5
+        },
+        {
+          "id": "billing_system",
+          "name": "Billing System",
+          "type": "Financial/Billing",
+          "status": "querying",
+          "recordsReturned": null
+        },
+        {
+          "id": "time_recording",
+          "name": "Time Recording",
+          "type": "Time & Activity",
+          "status": "querying",
+          "recordsReturned": null
+        },
+        {
+          "id": "hr_system",
+          "name": "HR System",
+          "type": "Human Resources",
+          "status": "querying",
+          "recordsReturned": null
+        }
+      ],
+      "result": {
+        "clientsAnalyzed": 5,
+        "avgLifetimeProfit": "$2.8M",
+        "status": "Engagement patterns analyzed"
+      }
+    },
+    {
+      "stepNumber": 4,
+      "phase": "WIP_CALCULATION",
+      "message": "Market Research Agent fetching external market data from Statista, Gartner, and industry reports...",
+      "details": "Querying OSINT sources for industry growth rates, market trends, and sector analysis to identify outreach opportunities.",
+      "duration": 5500,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "subquery_3",
+            "type": "SubQuery",
+            "label": "Gather Market Data",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "agent_eaa",
+            "type": "Agent",
+            "label": "Engagement Analytics Agent",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "agent_mra",
+            "type": "Agent",
+            "label": "Market Research Agent",
+            "status": "active",
+            "properties": {
+              "capability": "External Market Intelligence"
+            }
+          },
+          {
+            "id": "source_statista",
+            "type": "MarketData",
+            "label": "Statista",
+            "status": "querying",
+            "properties": {
+              "system": "Market Statistics Platform",
+              "dataType": "Market Growth Data"
+            }
+          },
+          {
+            "id": "source_gartner",
+            "type": "MarketData",
+            "label": "Gartner",
+            "status": "querying",
+            "properties": {
+              "system": "Industry Research",
+              "dataType": "Industry Reports"
+            }
+          },
+          {
+            "id": "source_industry",
+            "type": "MarketData",
+            "label": "Industry Publications",
+            "status": "querying",
+            "properties": {
+              "system": "Trade Publications",
+              "dataType": "Sector News & Trends"
+            }
+          },
+          {
+            "id": "client_acme",
+            "type": "Client",
+            "label": "Acme Corporation",
+            "status": "enriched",
+            "properties": {
+              "industry": "Technology",
+              "marketGrowth": "12.5%"
+            }
+          },
+          {
+            "id": "client_globalbank",
+            "type": "Client",
+            "label": "GlobalBank Inc",
+            "status": "enriched",
+            "properties": {
+              "industry": "Financial Services",
+              "marketGrowth": "8.2%"
+            }
+          },
+          {
+            "id": "client_medpharm",
+            "type": "Client",
+            "label": "MedPharm Ltd",
+            "status": "enriched",
+            "properties": {
+              "industry": "Healthcare",
+              "marketGrowth": "15.3%"
+            }
+          },
+          {
+            "id": "client_energyfirst",
+            "type": "Client",
+            "label": "EnergyFirst Corp",
+            "status": "enriched",
+            "properties": {
+              "industry": "Energy",
+              "marketGrowth": "6.1%"
+            }
+          },
+          {
+            "id": "client_retailmax",
+            "type": "Client",
+            "label": "RetailMax Group",
+            "status": "enriched",
+            "properties": {
+              "industry": "Retail",
+              "marketGrowth": "4.8%"
+            }
+          },
+          {
+            "id": "metric_tech",
+            "type": "Metric",
+            "label": "Tech +12.5%",
+            "status": "calculated",
+            "properties": {
+              "type": "MARKET_GROWTH"
+            }
+          },
+          {
+            "id": "metric_health",
+            "type": "Metric",
+            "label": "Health +15.3%",
+            "status": "calculated",
+            "properties": {
+              "type": "MARKET_GROWTH",
+              "alert": "HIGH"
+            }
+          },
+          {
+            "id": "metric_finance",
+            "type": "Metric",
+            "label": "Finance +8.2%",
+            "status": "calculated",
+            "properties": {
+              "type": "MARKET_GROWTH"
+            }
+          }
+        ],
+        "edges": [
+          { "source": "subquery_3", "target": "agent_mra", "type": "ASSIGNED_TO" },
+          { "source": "agent_eaa", "target": "agent_mra", "type": "HANDS_OFF_TO" },
+          { "source": "agent_mra", "target": "source_statista", "type": "QUERIES" },
+          { "source": "agent_mra", "target": "source_gartner", "type": "QUERIES" },
+          { "source": "agent_mra", "target": "source_industry", "type": "QUERIES" },
+          { "source": "source_statista", "target": "client_acme", "type": "ENRICHES" },
+          { "source": "source_statista", "target": "client_retailmax", "type": "ENRICHES" },
+          { "source": "source_gartner", "target": "client_globalbank", "type": "ENRICHES" },
+          { "source": "source_gartner", "target": "client_medpharm", "type": "ENRICHES" },
+          { "source": "source_industry", "target": "client_energyfirst", "type": "ENRICHES" },
+          { "source": "client_acme", "target": "metric_tech", "type": "HAS_METRIC" },
+          { "source": "client_medpharm", "target": "metric_health", "type": "HAS_METRIC" },
+          { "source": "client_globalbank", "target": "metric_finance", "type": "HAS_METRIC" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "engagement_analytics_agent",
+          "name": "Engagement Analytics Agent",
+          "status": "complete",
+          "action": "Completed engagement analysis"
+        },
+        {
+          "id": "market_research_agent",
+          "name": "Market Research Agent",
+          "status": "active",
+          "action": "Fetching external market intelligence"
+        }
+      ],
+      "sources": [
+        {
+          "id": "crm_system",
+          "name": "CRM System",
+          "type": "Client Relationship Management",
+          "status": "complete",
+          "recordsReturned": 5
+        },
+        {
+          "id": "billing_system",
+          "name": "Billing System",
+          "type": "Financial/Billing",
+          "status": "complete",
+          "recordsReturned": 847
+        },
+        {
+          "id": "time_recording",
+          "name": "Time Recording",
+          "type": "Time & Activity",
+          "status": "complete",
+          "recordsReturned": 2341
+        },
+        {
+          "id": "statista",
+          "name": "Statista",
+          "type": "Market Statistics (OSINT)",
+          "status": "querying",
+          "recordsReturned": null
+        },
+        {
+          "id": "gartner",
+          "name": "Gartner",
+          "type": "Industry Research (OSINT)",
+          "status": "querying",
+          "recordsReturned": null
+        },
+        {
+          "id": "industry_publications",
+          "name": "Industry Publications",
+          "type": "Trade Publications (OSINT)",
+          "status": "querying",
+          "recordsReturned": null
+        }
+      ],
+      "result": {
+        "marketsAnalyzed": 5,
+        "highGrowthSectors": 2,
+        "status": "Market data enrichment complete"
+      }
+    },
+    {
+      "stepNumber": 5,
+      "phase": "CLIENT_ENRICHMENT",
+      "message": "Calculating profitability metrics and generating bubble matrix positioning...",
+      "details": "Computing net profitability, leverage ratios, and lifetime value for each client. Mapping to market growth quadrants.",
+      "duration": 4000,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "subquery_4",
+            "type": "SubQuery",
+            "label": "Generate Recommendations",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "agent_mra",
+            "type": "Agent",
+            "label": "Market Research Agent",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "agent_cia",
+            "type": "Agent",
+            "label": "Client Insights Agent",
+            "status": "active",
+            "properties": {}
+          },
+          {
+            "id": "client_acme",
+            "type": "Client",
+            "label": "Acme Corporation",
+            "status": "final",
+            "properties": {
+              "industry": "Technology",
+              "lifetimeProfit": "$2.4M",
+              "profitability": "12%",
+              "marketGrowth": "12.5%",
+              "leverageRatio": "3.2",
+              "quadrant": "High Growth / Medium Profit"
+            }
+          },
+          {
+            "id": "client_globalbank",
+            "type": "Client",
+            "label": "GlobalBank Inc",
+            "status": "final",
+            "properties": {
+              "industry": "Financial Services",
+              "lifetimeProfit": "$5.1M",
+              "profitability": "18%",
+              "marketGrowth": "8.2%",
+              "leverageRatio": "2.8",
+              "quadrant": "Medium Growth / High Profit"
+            }
+          },
+          {
+            "id": "client_medpharm",
+            "type": "Client",
+            "label": "MedPharm Ltd",
+            "status": "final",
+            "properties": {
+              "industry": "Healthcare",
+              "lifetimeProfit": "$3.8M",
+              "profitability": "15%",
+              "marketGrowth": "15.3%",
+              "leverageRatio": "4.1",
+              "quadrant": "High Growth / High Profit"
+            }
+          },
+          {
+            "id": "client_energyfirst",
+            "type": "Client",
+            "label": "EnergyFirst Corp",
+            "status": "final",
+            "properties": {
+              "industry": "Energy",
+              "lifetimeProfit": "$1.9M",
+              "profitability": "9%",
+              "marketGrowth": "6.1%",
+              "leverageRatio": "1.9",
+              "quadrant": "Low Growth / Low Profit"
+            }
+          },
+          {
+            "id": "client_retailmax",
+            "type": "Client",
+            "label": "RetailMax Group",
+            "status": "final",
+            "properties": {
+              "industry": "Retail",
+              "lifetimeProfit": "$890K",
+              "profitability": "7%",
+              "marketGrowth": "4.8%",
+              "leverageRatio": "2.1",
+              "quadrant": "Low Growth / Low Profit"
+            }
+          },
+          {
+            "id": "lineage_path",
+            "type": "Lineage",
+            "label": "Data Lineage",
+            "status": "complete",
+            "properties": {
+              "path": "CRM → Billing → Time → HR → Statista → Gartner"
+            }
+          }
+        ],
+        "edges": [
+          { "source": "subquery_4", "target": "agent_cia", "type": "ASSIGNED_TO" },
+          { "source": "agent_mra", "target": "agent_cia", "type": "HANDS_OFF_TO" },
+          { "source": "query_root", "target": "lineage_path", "type": "TRACED_BY" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "market_research_agent",
+          "name": "Market Research Agent",
+          "status": "complete",
+          "action": "Market enrichment complete"
+        },
+        {
+          "id": "client_insights_agent",
+          "name": "Client Insights Agent",
+          "status": "active",
+          "action": "Calculating bubble matrix metrics"
+        }
+      ],
+      "sources": [
+        {
+          "id": "crm_system",
+          "name": "CRM System",
+          "type": "Client Relationship Management",
+          "status": "complete",
+          "recordsReturned": 5
+        },
+        {
+          "id": "billing_system",
+          "name": "Billing System",
+          "type": "Financial/Billing",
+          "status": "complete",
+          "recordsReturned": 847
+        },
+        {
+          "id": "time_recording",
+          "name": "Time Recording",
+          "type": "Time & Activity",
+          "status": "complete",
+          "recordsReturned": 2341
+        },
+        {
+          "id": "statista",
+          "name": "Statista",
+          "type": "Market Statistics (OSINT)",
+          "status": "complete",
+          "recordsReturned": 15
+        },
+        {
+          "id": "gartner",
+          "name": "Gartner",
+          "type": "Industry Research (OSINT)",
+          "status": "complete",
+          "recordsReturned": 8
+        },
+        {
+          "id": "industry_publications",
+          "name": "Industry Publications",
+          "type": "Trade Publications (OSINT)",
+          "status": "complete",
+          "recordsReturned": 12
+        }
+      ],
+      "result": {
+        "clientsScored": 5,
+        "highPriorityOutreach": 2,
+        "status": "Bubble matrix metrics calculated"
+      }
+    },
+    {
+      "stepNumber": 6,
+      "phase": "RESPONSE_SYNTHESIS",
+      "message": "Synthesizing final response with 2x2 Bubble Matrix visualization...",
+      "details": "All sub-queries complete. Building structured response with bubble matrix positioning and outreach recommendations.",
+      "duration": 4500,
+      "graph": {
+        "nodes": [
+          {
+            "id": "query_root",
+            "type": "Query",
+            "label": "User Query",
+            "status": "answered",
+            "properties": {}
+          },
+          {
+            "id": "response",
+            "type": "Response",
+            "label": "Final Answer",
+            "status": "complete",
+            "properties": {
+              "confidence": 0.94,
+              "visualizationType": "Bubble Matrix"
+            }
+          },
+          {
+            "id": "agent_cia",
+            "type": "Agent",
+            "label": "Client Insights Agent",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "agent_eaa",
+            "type": "Agent",
+            "label": "Engagement Analytics Agent",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "agent_mra",
+            "type": "Agent",
+            "label": "Market Research Agent",
+            "status": "complete",
+            "properties": {}
+          },
+          {
+            "id": "client_acme",
+            "type": "Client",
+            "label": "Acme Corporation",
+            "status": "final",
+            "properties": {}
+          },
+          {
+            "id": "client_globalbank",
+            "type": "Client",
+            "label": "GlobalBank Inc",
+            "status": "final",
+            "properties": {}
+          },
+          {
+            "id": "client_medpharm",
+            "type": "Client",
+            "label": "MedPharm Ltd",
+            "status": "final",
+            "properties": {}
+          },
+          {
+            "id": "client_energyfirst",
+            "type": "Client",
+            "label": "EnergyFirst Corp",
+            "status": "final",
+            "properties": {}
+          },
+          {
+            "id": "client_retailmax",
+            "type": "Client",
+            "label": "RetailMax Group",
+            "status": "final",
+            "properties": {}
+          },
+          {
+            "id": "lineage_complete",
+            "type": "Lineage",
+            "label": "Full Data Lineage",
+            "status": "verified",
+            "properties": {
+              "sources": 6,
+              "hops": 4,
+              "confidence": "94%"
+            }
+          }
+        ],
+        "edges": [
+          { "source": "query_root", "target": "response", "type": "PRODUCES" },
+          { "source": "agent_cia", "target": "response", "type": "CONTRIBUTES_TO" },
+          { "source": "agent_eaa", "target": "response", "type": "CONTRIBUTES_TO" },
+          { "source": "agent_mra", "target": "response", "type": "CONTRIBUTES_TO" },
+          { "source": "response", "target": "client_acme", "type": "CONTAINS" },
+          { "source": "response", "target": "client_globalbank", "type": "CONTAINS" },
+          { "source": "response", "target": "client_medpharm", "type": "CONTAINS" },
+          { "source": "response", "target": "client_energyfirst", "type": "CONTAINS" },
+          { "source": "response", "target": "client_retailmax", "type": "CONTAINS" },
+          { "source": "response", "target": "lineage_complete", "type": "BACKED_BY" }
+        ]
+      },
+      "agents": [
+        {
+          "id": "client_insights_agent",
+          "name": "Client Insights Agent",
+          "status": "complete",
+          "action": "Contributed client profitability analysis"
+        },
+        {
+          "id": "engagement_analytics_agent",
+          "name": "Engagement Analytics Agent",
+          "status": "complete",
+          "action": "Contributed engagement pattern analysis"
+        },
+        {
+          "id": "market_research_agent",
+          "name": "Market Research Agent",
+          "status": "complete",
+          "action": "Contributed market growth intelligence"
+        }
+      ],
+      "sources": [
+        {
+          "id": "crm_system",
+          "name": "CRM System",
+          "type": "Client Relationship Management",
+          "status": "complete",
+          "recordsReturned": 5
+        },
+        {
+          "id": "billing_system",
+          "name": "Billing System",
+          "type": "Financial/Billing",
+          "status": "complete",
+          "recordsReturned": 847
+        },
+        {
+          "id": "time_recording",
+          "name": "Time Recording",
+          "type": "Time & Activity",
+          "status": "complete",
+          "recordsReturned": 2341
+        },
+        {
+          "id": "statista",
+          "name": "Statista",
+          "type": "Market Statistics (OSINT)",
+          "status": "complete",
+          "recordsReturned": 15
+        },
+        {
+          "id": "gartner",
+          "name": "Gartner",
+          "type": "Industry Research (OSINT)",
+          "status": "complete",
+          "recordsReturned": 8
+        },
+        {
+          "id": "industry_publications",
+          "name": "Industry Publications",
+          "type": "Trade Publications (OSINT)",
+          "status": "complete",
+          "recordsReturned": 12
+        }
+      ],
+      "result": {
+        "totalClients": 5,
+        "highPriorityOutreach": 2,
+        "totalLifetimeValue": "$14.1M",
+        "status": "Query complete"
+      }
+    }
+  ],
+  "finalAnswer": {
+    "summary": "I have identified 5 clients with no engagement in the last 30 days. By cross-referencing internal data with external market intelligence, I've positioned each client on a 2x2 Bubble Matrix to prioritize outreach opportunities based on market growth potential and client profitability.",
+    "results": {
+      "High Growth / High Profit": [
+        {
+          "matterId": "client_medpharm",
+          "name": "MedPharm Ltd",
+          "avgWipAge": 52,
+          "daysSinceLastBilled": 52
+        }
+      ],
+      "High Growth / Medium Profit": [
+        {
+          "matterId": "client_acme",
+          "name": "Acme Corporation",
+          "avgWipAge": 45,
+          "daysSinceLastBilled": 45
+        }
+      ],
+      "Medium Growth / High Profit": [
+        {
+          "matterId": "client_globalbank",
+          "name": "GlobalBank Inc",
+          "avgWipAge": 38,
+          "daysSinceLastBilled": 38
+        }
+      ],
+      "Low Growth / Low Profit": [
+        {
+          "matterId": "client_energyfirst",
+          "name": "EnergyFirst Corp",
+          "avgWipAge": 41,
+          "daysSinceLastBilled": 41
+        },
+        {
+          "matterId": "client_retailmax",
+          "name": "RetailMax Group",
+          "avgWipAge": 33,
+          "daysSinceLastBilled": 33
+        }
+      ]
+    },
+    "lineage": {
+      "sources": ["CRM System", "Billing System", "Time Recording", "HR System", "Statista", "Gartner", "Industry Publications"],
+      "agents": ["Client Insights Agent", "Engagement Analytics Agent", "Market Research Agent"],
+      "queryPath": "CRM → Billing → Time → HR → Statista → Gartner → Industry Publications",
+      "confidence": 0.94
+    }
+  },
+  "metadata": {
+    "totalDuration": 25000,
+    "graphOperations": 6,
+    "sourcesQueried": 7,
+    "agentsUsed": 3,
+    "entitiesResolved": 5
+  }
+}

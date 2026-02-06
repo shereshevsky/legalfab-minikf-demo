@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLegalFabDemo } from './hooks/useLegalFabDemo';
+import { useLegalFabDemo, type DemoType } from './hooks/useLegalFabDemo';
 import { Header } from './components/Header';
 import { QueryPanel } from './components/QueryPanel';
 import { StepIndicator } from './components/StepIndicator';
@@ -11,7 +11,8 @@ import { ResultsPanel } from './components/ResultsPanel';
 import { StepMessage } from './components/StepMessage';
 
 function App() {
-  const demo = useLegalFabDemo();
+  const [selectedDemo, setSelectedDemo] = useState<DemoType>('billing');
+  const demo = useLegalFabDemo(selectedDemo);
   const [showResults, setShowResults] = useState(false);
 
   // Show results when demo completes
@@ -26,7 +27,7 @@ function App() {
   return (
     <div className="h-screen w-screen flex flex-col overflow-hidden">
       {/* Header */}
-      <Header />
+      <Header selectedDemo={selectedDemo} onDemoChange={setSelectedDemo} />
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col p-4 gap-4 overflow-hidden">

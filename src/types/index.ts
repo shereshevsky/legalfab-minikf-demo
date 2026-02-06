@@ -41,7 +41,7 @@ export interface GraphNode {
   properties: Record<string, unknown>;
 }
 
-export type NodeType = 
+export type NodeType =
   | 'Query'
   | 'SubQuery'
   | 'Agent'
@@ -51,7 +51,8 @@ export type NodeType =
   | 'Filter'
   | 'Metric'
   | 'Lineage'
-  | 'Response';
+  | 'Response'
+  | 'MarketData';
 
 export type NodeStatus = 
   | 'pending'
@@ -153,6 +154,7 @@ export const NODE_COLORS: Record<NodeType, string> = {
   Metric: '#ef4444',
   Lineage: '#84cc16',
   Response: '#22c55e',
+  MarketData: '#ec4899',
 };
 
 export const STATUS_COLORS: Record<NodeStatus, string> = {
